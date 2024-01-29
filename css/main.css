@@ -1,3 +1,52 @@
+body {
+  margin: 0;
+}
+
 nav {
-  background: no-repeat, url("../../data/logo/Mask group.png");
+  height: 665px;
+  width: 100%;
+  background: url("../../data/logo/Mask group.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.logo {
+  margin-top: 51px;
+  margin-left: 69px;
+}
+
+.title {
+  font-size: 44px;
+  margin-top: 150px;
+  margin-left: 15%;
+  color: #FFD15B;
+  font-family: "Anton", Arial, Helvetica, sans-serif;
+}
+
+#search {
+  width: 954px;
+  height: 72px;
+  margin-left: 10%;
+  border-radius: 11px;
+  max-width: 80%;
+  padding-left: 35px;
+  font-size: 16px;
+  color: #7a7a7a;
+  font-family: "Manerope", Arial, Helvetica, sans-serif;
+}
+
+button {
+  border: none;
+  position: relative;
+  right: 69px;
+  top: 22px;
+  background-color: white;
+}
+
+.tag {
+  margin-top: 20px;
+}
+.tag _dropdown {
+  border-radius: 11px;
+  width: 195px;
 }/*# sourceMappingURL=main.css.map */
