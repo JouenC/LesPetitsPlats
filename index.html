@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
+        <link href="sass/css/index.min.css" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Manerope" rel="stylesheet">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Les Petits Plats</title>
@@ -8,26 +11,31 @@
 
 <body>
     <header>
-        <img src="data/logo/Logo.png" alt="logo Les Petits Plats" aria-label="logo Les Petits Plats"/>
-        <img src="data/logo/Mask group.png"/>
-        <h1>RECHERCHEZ PARMI PLUS DE 1500 RECETTES <br> DU QUOTIDIEN, SIMPLES ET DELICIEUSES</h1>
+      <nav class="nav">
+        <a href="index.html" aria-label="Retour à l'index">
+          <img class="logo" src="data/logo/Logo.png" alt="logo Les Petits Plats" aria-label="logo Les Petits Plats"/>
+        </a>
+        <h1 class="title">RECHERCHEZ PARMI PLUS DE 1500 RECETTES <br> DU QUOTIDIEN, SIMPLES ET DELICIEUSES</h1>
         <form role="search">
             <div>
-              <input 
+              <input
                 type="search"
-                id="maRecherche"
+                id="search"
                 name="q"
                 placeholder="Rechercher une recette, un ingrédient, ..."
                 aria-label="Rechercher parmi les recettes du site"
-                size="100"
                 minlength="3"
                 pattern="[A-z]"/>
-              <button><img src="data/logo/Loop CTA.png" alt="Rechercher" aria-label="Lancer la recherche"></button>
-              <button><img src="data/logo/Group 4.png" alt="Rechercher" aria-label="Lancer la recherche"></button>
+              <button><img class="button" src="data/logo/Loop CTA.png" alt="Rechercher" aria-label="Lancer la recherche"></button>
             </div>
           </form>
-          
+      </nav>    
     </header>
+
+    <section>
+      <div class="dropdown"></div>
+      <div class="recepice-count"></div>
+    </section>
     
 </body>
 
