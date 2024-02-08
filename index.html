@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <link href="sass/css/index.min.css" rel="stylesheet" type="text/css" />
+        <link href="css/main.css" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
         <!-- <link href="https://fonts.googleapis.com/css?family=Manerope" rel="stylesheet"> -->
         <meta charset="UTF-8">
@@ -35,7 +35,16 @@
     <section class="recipes">
       <div class="flex">
         <div class="dropdown">
+          <select class="dropdown_select dropdown_ingredients" aria-label="dropdown for media sorting">
+            <option class="dropdown_title">Ingrédients</option>
+            <!-- <option class="dropdown_select" value="Popularité" aria-label="sorting for popularity"> Popularité </option>
+            <option class="dropdown_select" value="Date" aria-label="sorting for date"> Date </option>
+            <option class="dropdown_select" value="Titre" aria-label="sorting for title"> Titre </option> -->
+          </select>
+        </div>
+        <div class="dropdown">
           <select class="dropdown_select" aria-label="dropdown for media sorting">
+            <option class="dropdown_title">Appareils</option>
             <option class="dropdown_select" value="Popularité" aria-label="sorting for popularity"> Popularité </option>
             <option class="dropdown_select" value="Date" aria-label="sorting for date"> Date </option>
             <option class="dropdown_select" value="Titre" aria-label="sorting for title"> Titre </option>
@@ -43,13 +52,7 @@
         </div>
         <div class="dropdown">
           <select class="dropdown_select" aria-label="dropdown for media sorting">
-            <option class="dropdown_select" value="Popularité" aria-label="sorting for popularity"> Popularité </option>
-            <option class="dropdown_select" value="Date" aria-label="sorting for date"> Date </option>
-            <option class="dropdown_select" value="Titre" aria-label="sorting for title"> Titre </option>
-          </select>
-        </div>
-        <div class="dropdown">
-          <select class="dropdown_select" aria-label="dropdown for media sorting">
+            <option class="dropdown_title">Ustensiles</option>
             <option class="dropdown_select" value="Popularité" aria-label="sorting for popularity"> Popularité </option>
             <option class="dropdown_select" value="Date" aria-label="sorting for date"> Date </option>
             <option class="dropdown_select" value="Titre" aria-label="sorting for title"> Titre </option>
