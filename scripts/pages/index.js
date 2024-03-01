@@ -14,33 +14,6 @@ function recipesCount(numberOfRecipes) {
     number.innerHTML = numberOfRecipes + " recettes"
 }
 
-// Create dropdown
-// function recipesDropdown(item) {
-
-//     let dropdownIngredient = document.querySelector(".dropdown_ingredients")
-//     let allIngredients = ""
-
-//     console.log(item)
-//     console.log(dropdownIngredient)
-
-//     // dropdownIngredient.innerHTML = `
-//     //     <div class="dropdown">
-//     //         <div class="dropdown_title">Ingrédients</div>
-//     //         <select class="dropdown_select" aria-label="dropdown for media sorting">
-//     //             <option class="dropdown_select" value="Popularité" aria-label="sorting for popularity"> Popularité </option>
-//     //             <option class="dropdown_select" value="Date" aria-label="sorting for date"> Date </option>
-//     //             <option class="dropdown_select" value="Titre" aria-label="sorting for title"> Titre </option>
-//     //         </select>
-//     //     </div>
-//     // `
-//     for (i = 0; i <item.length; i++) {
-//         allIngredients = `
-//             <option class="dropdown_select" value="${item[i]}" aria-label="sorting for ${item[i]}"> ${item[i]} </option>
-//         `
-//         allIngredients.appendChild(dropdownIngredient)
-//     }
-// }
-
 // Create cards
 function recipesCard(recipes) {
 
@@ -58,7 +31,7 @@ function recipesCard(recipes) {
 
         // Recette Courante
         const currentRecipe = recipes[i]
-
+        // console.log(currentRecipe.name)
         // Create article for each cards
         const article = document.createElement('article')
 
@@ -67,37 +40,33 @@ function recipesCard(recipes) {
         for(let j = 0; j < currentRecipe.ingredients.length; j++) {
             let {ingredient, unit = "", quantity = ""} = currentRecipe.ingredients[j]
 
-            if (tempIngredients.includes(ingredient.toLowerCase())) continue
-        
             // Create a part for cards
-            tempIngredients.push(ingredient.toLowerCase())
             ingredients+= `<li class="card_ingredients"> ${ingredient} <div class="card_quantity">${quantity} ${unit}</div></li>`
-            
+
+            if (tempIngredients.includes(ingredient.toLowerCase())) continue
+            tempIngredients.push(ingredient.toLowerCase())
+
             // Create dropdown option for ingredients
             dropdownIngredient.innerHTML += `
                 <option class="dropdown_select dropdown_ingredients_option" value="${ingredient}" aria-label="sorting for ${ingredient}"> ${ingredient} </option>
             `
         }
-        console.log(tempIngredients)
-        // Create dropdown option for ingredients
-        // tempIngredients.forEach((element) => 
-        //     dropdownIngredient.innerHTML += `
-        //         <option class="dropdown_select dropdown_ingredients_option" value="${element}" aria-label="sorting for ${element}"> ${element} </option>
-        //     `
-        // )
-        // tempIngredients = []
-        tempIngredients = []
+        // console.log(tempIngredients)
 
+        
         // Creation d'un tableau contenant les appliances
-        if (tempAppliance.includes(recipes[i].appliance.toLowerCase())) continue
-        tempAppliance.push(recipes[i].appliance.toLowerCase())
+        if (!tempAppliance.includes(recipes[i].appliance.toLowerCase())) {
+            tempAppliance.push(recipes[i].appliance.toLowerCase())
+        }
         
         // Création d'un tableau contenant les ustensils
         for(let j = 0; j < recipes[i].ustensils.length; j++) {
             if (tempUstensils.includes(recipes[i].ustensils[j].toLowerCase())) continue
             tempUstensils.push(recipes[i].ustensils[j].toLowerCase())
         }
-        
+
+        // console.log(">", recipes[i].name)
+
         // Cards HTML
         article.innerHTML = `
             <div class="card">
@@ -126,6 +95,8 @@ function recipesCard(recipes) {
         recipesContainer.appendChild(article)
     }
     
+    tempIngredients = []
+
     // Create dropdown option for appliance
     tempAppliance.forEach((element) => 
         dropdownAppliance.innerHTML += `
