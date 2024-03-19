@@ -5,8 +5,6 @@ const recipesContainer = document.querySelector(".recipes_cards")
 // ??? dropdown
 const dropdownIngredient = document.querySelector(".dropdown_ingredients")
 
-console.log(allRecipes)
-
 // Count number of recipes
 function recipesCount(numberOfRecipes) {
     console.log(numberOfRecipes)
@@ -51,8 +49,6 @@ function recipesCard(recipes) {
                 <option class="dropdown_select dropdown_ingredients_option" value="${ingredient}" aria-label="sorting for ${ingredient}"> ${ingredient} </option>
             `
         }
-        // console.log(tempIngredients)
-
         
         // Creation d'un tableau contenant les appliances
         if (!tempAppliance.includes(recipes[i].appliance.toLowerCase())) {
@@ -118,8 +114,7 @@ function recipesCard(recipes) {
 function displayRecipes(recipes) {
    
     recipesCount(recipes.length)
-    recipesCard(recipes)
-   
+    recipesCard(recipes)  
 }
 
 // Call display page
