@@ -1,35 +1,16 @@
-// Fonction de tri des mots commençant par les lettres saisies dans la barre de recherche
-const selectIngredient = document.querySelector('.dropdown_ingredients')
-const selectAppliance = document.querySelector('.dropdown_appliance')
-const selectUstensils = document.querySelector('.dropdown_ustensils')
-
 // Dropdonw qui resteront sélectionnés
 let ingredientTags = []
 let ustensilTags = []
 let applianceTags = []
 let filterRecipes = []
 
-const clearRecipes = () => {
-
-    // Efface les cards
-    const recipesContainer = document.querySelector(".recipes_cards")
-    recipesContainer.innerHTML = ``
-
-    // Efface les tags
-    selectIngredient.innerHTML = ``
-    selectAppliance.innerHTML = ``
-    selectUstensils.innerHTML = ``
-}
-
+// Filtre les entrées dans la barre de recherche
 function searchRecipes() {
     // Récupérer la valeur saisie dans la barre de recherche
     const searchWord = document.querySelector('#search').value.trim().toLowerCase()
-
-    // console.log(searchWord, allRecipes)
     
-
+    // Display all recipes if search bar is empty
     if (searchWord.length === 0) {
-            clearRecipes()
             displayRecipes(allRecipes)
             return
     }
@@ -42,8 +23,6 @@ function searchRecipes() {
     
     // Filtrer les mots contenant la chaîne de caractère
     let fileredRecipesByWord = filterBy(allRecipes, searchWord, ["name", "description", "ingredients", "ustensils", "appliance"]);
-
-    clearRecipes()
     
     // Affiche les nouvelles cards correspondant à la recherche
     displayRecipes(fileredRecipesByWord) 
@@ -52,6 +31,135 @@ function searchRecipes() {
 // Appel de la fonction searchRecipes lorsqu'une touche est relâchée dans la barre de recherche
 document.querySelector('#search').addEventListener('keyup', searchRecipes)
 
+// Filtre les entrées dans la barre de ingredient
+function searchRecipesIngredients() {
+    // Récupérer la valeur saisie dans la barre de recherche
+    const searchWord = document.querySelector('#search_ingredient').value.trim().toLowerCase()
+    const ingredientOptions = document.querySelectorAll('.dropdown_ingredients_option')
+
+    const ingredientOrigin = ingredientOptions
+    // console.log(ingredientOrigin.forEach(item => { console.log(item.value)}))
+
+    try {
+        // Utiliser la fonction searchTag et récupérer la valeur retournée dans tempItem
+        tempItem = searchTag(searchWord, ingredientOptions);
+
+        // Vérifier si tempItem est vide, si c'est le cas, afficher un message d'erreur
+        if (tempItem.length === 0) {
+            selectIngredient.innerHTML = "";
+            ingredientOrigin.forEach(item => {
+                // Create dropdown option for ingredients
+                selectIngredient.innerHTML += `
+                    <option class="dropdown_select dropdown_ingredients_option" value="${item}" aria-label="sorting for ${item}"> ${item} </option>
+                `;
+            });
+            throw new Error("Grand Néant");
+        }
+
+        // Vérifier si la saisie est valide (au moins 3 caractères)
+        if (searchWord.length < 2) {
+            throw new Error("Veuillez saisir au moins 3 caractères.")
+        }
+
+        console.log(">>>>", tempItem);
+
+        selectIngredient.innerHTML = "";
+        tempItem.forEach(item => {
+            // Create dropdown option for ingredients
+            selectIngredient.innerHTML += `
+                <option class="dropdown_select dropdown_ingredients_option" value="${item}" aria-label="sorting for ${item}"> ${item} </option>
+            `;
+        });
+    } catch (error) {
+        console.error(error.message); // Afficher l'erreur dans la console
+    }
+}
+
+function searchRecipesAppliances() {
+    // Récupérer la valeur saisie dans la barre de recherche
+    const searchWord = document.querySelector('#search_appliance').value.trim().toLowerCase()
+    const applianceOptions = document.querySelectorAll('.dropdown_appliance_option')
+    
+    try {
+        // Utiliser la fonction searchTag et récupérer la valeur retournée dans tempItem
+        tempItem = searchTag(searchWord, applianceOptions);
+
+        // Vérifier si tempItem est vide, si c'est le cas, afficher un message d'erreur
+        if (tempItem.length === 0) {
+            throw new Error("Grand Néant");
+        }
+
+        // Vérifier si la saisie est valide (au moins 3 caractères)
+        if (searchWord.length < 2) {
+            throw new Error("Veuillez saisir au moins 3 caractères.")
+        }
+
+        console.log(">>>>", tempItem);
+
+        selectAppliance.innerHTML = "";
+        tempItem.forEach(item => {
+            // Create dropdown option for ingredients
+            selectAppliance.innerHTML += `
+                <option class="dropdown_select dropdown_appliance_option" value="${item}" aria-label="sorting for ${item}"> ${item} </option>
+            `;
+        });
+    } catch (error) {
+        console.error(error.message); // Afficher l'erreur dans la console
+    }
+}
+
+function searchRecipesUstensiles() {
+    // Récupérer la valeur saisie dans la barre de recherche
+    const searchWord = document.querySelector('#search_ustensile').value.trim().toLowerCase()
+    const ustensilsOptions = document.querySelectorAll('.dropdown_ustensils_option')
+
+    try {
+        // Utiliser la fonction searchTag et récupérer la valeur retournée dans tempItem
+        tempItem = searchTag(searchWord, ustensilsOptions);
+
+        // Vérifier si tempItem est vide, si c'est le cas, afficher un message d'erreur
+        if (tempItem.length === 0) {
+            throw new Error("Grand Néant");
+        }
+
+        // Vérifier si la saisie est valide (au moins 3 caractères)
+        if (searchWord.length < 2) {
+            throw new Error("Veuillez saisir au moins 3 caractères.")
+        }
+
+        console.log(">>>>", tempItem, selectUstensils);
+
+        selectUstensils.innerHTML = "";
+        tempItem.forEach(item => {
+            // Create dropdown option for ingredients
+            selectUstensils.innerHTML += `
+                <option class="dropdown_select dropdown_ustensils_option" value="${item}" aria-label="sorting for ${item}"> ${item} </option>
+            `;
+        });
+    } catch (error) {
+        console.error(error.message); // Afficher l'erreur dans la console
+    }
+}
+
+// Filtre les entrées dans la barre de recherche
+const searchTag = (searchZone, searchItem) => {
+    const tempItem = []
+
+    // Récupérez la valeur de chaque élément <option> et ajoutez-la au tableau TempIngredient
+    searchItem.forEach(option => {
+        if (option.value.includes(searchZone)) {
+           tempItem.push(option.value); 
+        }   
+    });
+
+    console.log(tempItem)    
+    return tempItem
+}
+
+// Appel de la fonction searchRecipes lorsqu'une touche est relâchée dans la barre de recherche
+document.querySelector('#search_ingredient').addEventListener('keyup', searchRecipesIngredients)
+document.querySelector('#search_appliance').addEventListener('keyup', searchRecipesAppliances)
+document.querySelector('#search_ustensile').addEventListener('keyup', searchRecipesUstensiles)
 
 // Delete item from focusRecipes, focusAppliance or focusUstensils
 function deletItem(tableau, valeur) {
@@ -64,188 +172,140 @@ function deletItem(tableau, valeur) {
     console.log("La valeur", valeur, "a été supprimée du tableau.")
 }
 
-// document.querySelector('.focus_ingredients').addEventListener('click', console.log(ingredientTags))
-// document.querySelector('.focus_ingredients').addEventListener('click', deletItem(ingredientTags, this.value))
-
 // Element for focusConstruct
 const divIngredient = document.createElement('div')
-divIngredient.className = "focus_ingredients"
-// div.innerHTML = `Remplissage`
-// focusElement.appendChild(div)
+divIngredient.className = "focus focus_ingredients"
+const divAppliance = document.createElement('div')
+divAppliance.className = "focus focus_appliances"
+const divUstensil = document.createElement('div')
+divUstensil.className = "focus focus_ustensile"
 
 // Display select tag ingredient
-function focusConstruct(focus) {
-    const focusElementIngredient = document.querySelector('.select_ingredients')
-    divIngredient.innerHTML = ``
-    focus.forEach((element) => 
-        divIngredient.innerHTML += `
-            ${element}
-        `,
-        focusElementIngredient.appendChild(divIngredient)
-    )    
+function focusConstruct(focus, type) {
+    let focusElement
+    switch (type) {
+        case 'ingredients':
+            focusElement = document.querySelector('.select_ingredients')
+                divIngredient.innerHTML = ``
+                focus.forEach((element) => 
+                    divIngredient.innerHTML += `
+                        <p>${element}<p>
+                    `,
+                    divIngredient.style.backgroundColor = 'orange',
+                    focusElement.appendChild(divIngredient)
+                )
+            break;
+        case 'appliance':
+            focusElement = document.querySelector('.select_appliance')
+                divAppliance.innerHTML = ``
+                focus.forEach((element) => 
+                    divAppliance.innerHTML += `
+                        <p>${element}<p>
+                    `,
+                    divAppliance.style.backgroundColor = 'orange',
+                    focusElement.appendChild(divAppliance)
+                )
+            break;
+        case 'ustensils':
+            focusElement = document.querySelector('.select_ustensiles')
+                divUstensil.innerHTML = ``
+                focus.forEach((element) => 
+                    divUstensil.innerHTML += `
+                        <p>${element}<p>
+                    `,
+                    divUstensil.style.backgroundColor = 'orange',
+                    focusElement.appendChild(divUstensil)
+                )
+            break;
+        default:
+            console.log('Oups!');
+            break;
+    }
+        
 }
 
-// // Récupération des éléments de dropdown
-// const ingredientsDropdown = document.querySelector('.dropdown_ingredients')
-// const ustensilesDropdown = document.getElementById('.dropdown_appliance')
-// const appliancesDropdown = document.getElementById('.dropdown_ustensils')
+selectIngredient.addEventListener('change', focusConstruct)
+selectAppliance.addEventListener('change', focusConstruct)
+selectUstensils.addEventListener('change', focusConstruct)
 
-// // Fonction pour filtrer et afficher les recettes
-// function filtrerRecettes() {
-//     // Récupérer les éléments sélectionnés dans chaque dropdown
-//     const ingredientsSelectionnes = Array.from(ingredientsDropdown.selectedOptions).map(option => option.value)
-//     const ustensilesSelectionnes = Array.from(ustensilesDropdown.selectedOptions).map(option => option.value)
-//     const appliancesSelectionnes = Array.from(appliancesDropdown.selectedOptions).map(option => option.value)
-//     // Filtrer les recettes selon les sélections
-//     const recettesFiltrees = RECETTES.filter(recette =>
-//         ingredientsSelectionnes.every(ingredient => recette.ingredients.includes(ingredient)) &&
-//         ustensilesSelectionnes.every(ustensile => recette.ustensiles.includes(ustensile)) &&
-//         appliancesSelectionnes.every(appliance => recette.appliances.includes(appliance))
-//     )
-//     console.log(recettesFiltrees)
-//     // Afficher les recettes filtrées
-//     displayRecipes(recettesFiltrees)
+// // Recherche dans les dropdowns
+// function searchDropdown(type) {
+//     console.log("<<<<<<<", this.value)
+    
+//     // Push or delete item from focusRecipes
+//     if(!ingredientTags.includes(this.value)) {
+//         ingredientTags.push(this.value)
+//         focusConstruct(ingredientTags)
+//     } else {
+//         deletItem(ingredientTags, this.value)
+//         focusConstruct(ingredientTags)
+//     }
+    
+//     const tags = {
+//         ingredients: ingredientTags,
+//         ustensils: ustensilTags,
+//         appliance: applianceTags
+//     }
+//     filteredByTag = filterByMulti(allRecipes, tags)
+
+//     displayRecipes(filteredByTag)
 // }
 
-// // Écouter les changements dans les dropdowns
-// ingredientsDropdown.addEventListener('change', filtrerRecettes)
-// ustensilesDropdown.addEventListener('change', filtrerRecettes)
-// appliancesDropdown.addEventListener('change', filtrerRecettes)
+function searchDropdown(type) {
+    const selectValue = this.value.trim().toLowerCase(); // Valeur sélectionnée dans le dropdown
+    let tagsToUpdate = []; // Tableau pour stocker les tags à mettre à jour
+    let filterType = ''; // Type de filtre à mettre à jour
 
-// Recherche dans les dropdowns
-function searchDropdown() {
-    console.log("<<<<<<<", this.value)
-    
-    // Push or delete item from focusRecipes
-    if(!ingredientTags.includes(this.value)) {
-        ingredientTags.push(this.value)
-        // focusConstruct(ingredientTags)
+    console.log(this.value, this.className)
+
+    // Déterminer quel tableau de tags mettre à jour en fonction du type de dropdown
+    switch (this.className) {
+        case 'dropdown_select dropdown_ingredients':
+            tagsToUpdate = ingredientTags;
+            filterType = 'ingredients';
+            break;
+        case 'dropdown_select dropdown_appliance':
+            console.log("Hello Appliance!", applianceTags);
+            tagsToUpdate = applianceTags;
+            filterType = 'appliance';
+            break;
+        case 'dropdown_select dropdown_ustensils':
+            tagsToUpdate = ustensilTags;
+            filterType = 'ustensils';
+            break;
+        default:
+            break;
+    }
+
+    // Vérifier si la valeur sélectionnée est déjà présente dans les tags
+    if (!tagsToUpdate.includes(selectValue)) {
+        // Si la valeur n'est pas présente, l'ajouter
+        tagsToUpdate.push(selectValue);
+        focusConstruct(tagsToUpdate, filterType);
     } else {
-        deletItem(ingredientTags, this.value)
-        // focusConstruct(ingredientTags)
+        // Si la valeur est déjà présente, la supprimer
+        deletItem(tagsToUpdate, selectValue);
+        focusConstruct(tagsToUpdate, filterType);
     }
 
-    for (const el of ingredientTags) {
-        let fileredByTag = filterBy(allRecipes, el, ["ingredients", "ustensils", "appliance"])
-        console.log(fileredByTag)
+    // Mettre à jour les éléments de focus et les tags
+    // focusConstruct(ingredientTags, ustensilTags, applianceTags);
 
-        clearRecipes()
-        displayRecipes(fileredByTag)
-    }
-    
-    // let tags = [...ustensilTags, ...applianceTags, ...ingredientTags]
+    // Créer un objet contenant les tags
+    const tags = {
+        ingredients: ingredientTags,
+        ustensils: ustensilTags,
+        appliance: applianceTags
+    };
 
-    // // Filtrer les mots commençant par la chaîne de recherche
-    // for ( i = 0 ; i < allRecipes.length; i++) {
-    //     const recipe = allRecipes[i];
-    //     if(filterRecipes.includes(recipe)) continue;
-    //     let ingredients = recipe.ingredients;
-    //     let temp = [...recipe.ustensils, recipe.appliance]
+    // Filtrer les recettes en fonction des tags
+    filteredByTag = filterByMulti(allRecipes, tags);
 
-    //     // Lister les noms des ingrédients -> recipe.ingredients.map(item => item.ingredient)
-    //     for (let h = 0; h < ingredients.length; h++) {
-    //         temp.push(ingredients[h].ingredient);
-    //     }
-
-    //     let tagMatchCount = 0;
-    //     // Boucle sur les tags sélectionnés
-    //     for(let j = 0; j < tags.length; j++) {
-    //         let tag = tags[j];
-    //         console.log('>>>', tag)
-
-    //         if (temp.includes(tag)) {
-    //             tagMatchCount += 1;
-    //         }
-    //     }
-    //     console.log(tagMatchCount, tags.length)
-    //     if (tagMatchCount === tags.length) {
-    //         filterRecipes.push(recipe);
-    //     }
-
-    // }
-    // console.log(filterRecipes)
-
-    // // Efface les cards
-    // const recipesContainer = document.querySelector(".recipes_cards")
-    // recipesContainer.innerHTML = ``
-
-    // // Efface les tags
-    // selectIngredient.innerHTML = ``
-    // selectAppliance.innerHTML = ``
-    // selectUstensils.innerHTML = ``
-
-    // // Affiche les nouvelles cards correspondant à la recherche
-    // displayRecipes(filterRecipes)
+    // Afficher les recettes filtrées
+    displayRecipes(filteredByTag);
 }
 
 // Appel de la fonction searchDropdown lors d'un clique
 selectIngredient.addEventListener('change', searchDropdown)
 selectAppliance.addEventListener('change', searchDropdown)
 selectUstensils.addEventListener('change', searchDropdown)
-
-// // Recherche dans les dropdowns
-// function searchDropdownAppliance() {
-//     console.log("<<<<<<<", this.value)
-    
-//     let filterRecipes = []
-    
-//     // Filtrer les mots commençant par la chaîne de recherche
-//     for ( i = 0 ; i < allRecipes.length; i++) {
-//         let appliance = allRecipes[i].appliance
-        
-//         if(appliance.toLowerCase() === this.value) {
-//             console.log(allRecipes[i])
-//             filterRecipes.push(allRecipes[i])
-//         }
-        
-//     }
-//     console.log(filterRecipes)
-
-//     // Efface les cards
-//     const recipesContainer = document.querySelector(".recipes_cards")
-//     recipesContainer.innerHTML = ``
-
-//     // Efface les tags
-//     selectIngredient.innerHTML = ``
-//     selectAppliance.innerHTML = ``
-//     selectUstensils.innerHTML = ``
-
-//     // Affiche les nouvelles cards correspondant à la recherche
-//     displayRecipes(filterRecipes)
-// }
-
-// // Appel de la fonction searchDropdown lors d'un clique
-// selectAppliance.addEventListener('change', searchDropdownAppliance)
-
-// // Recherche dans les dropdowns
-// function searchDropdownUstensils() {
-//     console.log("<<<<<<<", this.value)
-    
-//     let filterRecipes = []
-    
-//     // Filtrer les mots commençant par la chaîne de recherche
-//     for ( i = 0 ; i < allRecipes.length; i++) {
-//         let ustensils = allRecipes[i].ustensils
-
-//         for(let j = 0; j < ustensils.length; j++) {
-//             if(ustensils[j].toLowerCase() === this.value) {
-//                 filterRecipes.push(allRecipes[i])
-//             }  
-//         }  
-//     }
-
-//     // Efface les cards
-//     const recipesContainer = document.querySelector(".recipes_cards")
-//     recipesContainer.innerHTML = ``
-
-//     // Efface les tags
-//     selectIngredient.innerHTML = ``
-//     selectAppliance.innerHTML = ``
-//     selectUstensils.innerHTML = ``
-
-//     // Affiche les nouvelles cards correspondant à la recherche
-//     displayRecipes(filterRecipes)
-// }
-
-// // Appel de la fonction searchDropdown lors d'un clique
-// selectUstensils.addEventListener('change', searchDropdownUstensils)

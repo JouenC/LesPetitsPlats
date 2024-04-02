@@ -19,25 +19,39 @@ const listElementToLowerCase = (list) => {
 
 //
 const filterResourceByIngredients = (el, filter) => {
-    const ingredients = getRecipeIngredientsArray(el);
-    for (const ingredient of ingredients) {
-      if (ingredient.includes(filter)) return true;
+    let ingredientsFilter = [filter]; // [[SUcre, caroote]]
+    if (Array.isArray(filter)) {
+      ingredientsFilter = filter
     }
-    return false; 
+    const ingredients = getRecipeIngredientsArray(el);
+      for (ingredientFilter of ingredientsFilter) {
+        if (!ingredients.includes(ingredientFilter)) return false;
+      }
+
+    return true; 
 }
 
 
 
 const filterResourceByUstensils = (el, filter) => {
-    const formattedList = listElementToLowerCase(el.ustensils)
-    for (const ustensil of formattedList) {
-      if (ustensil.includes(filter)) return true;
+  let ustensilsFilter = [filter];
+  if (Array.isArray(filter)) {
+    ustensilsFilter = filter
+  }
+    const formattedList = listElementToLowerCase(el.ustensils);
+    for (ustensilFilter of ustensilsFilter) {
+      if (!formattedList.includes(ustensilFilter)) return false;
     }
-    return false;
+    return true;
 }
 
-// const filterResourceByAppliance = (el, filter) => el.appliance.toLowerCase().inclurdes(filter);
-const filterResourceByAppliance = (el, filter) => el.appliance.toLowerCase().includes(filter);
+const filterResourceByAppliance = (el, filter) => {
+  let appliancesFilter = [filter];
+  if (Array.isArray(filter)) {
+    appliancesFilter = filter
+  }
+  appliancesFilter.includes(el.appliance.toLowerCase());
+}
 const filterResourceByString = (el, filter, researchPool) => el[researchPool].toLowerCase().includes(filter);
 
 // Search by time.
@@ -91,7 +105,60 @@ const filterBy = (resources, filter, types) => {
   return resourceSubset;
 }
 
+const filterByMulti = (resources, filters) => {
+  const resourceSubset = [];
+  // const formattedFilter = filters.map(filter => filter.toLowerCase());
+   
+  // // Vérifier si les ressources sont vides ou si aucun type n'est spécifié
+  // if (resources.length === 0 || types.length === 0) {
+  //   return resourceSubset; // Retourner un tableau vide si c'est le cas
+  // }
 
+  for (const el of resources) {
+    let isSubset = true; // Pour vérifier si l'élément satisfait tous les filtres
+
+    for (let [tagFamily, tags] of Object.entries(filters)) {
+      if (!tags.length) continue;
+
+      const formattedTags = tags.map(tag => tag.toLowerCase());
+      if (!filterFunction[tagFamily](el, formattedTags)) {
+        isSubset = false;
+        break;
+      }
+    }
+
+    // if (!filterFunction['ingredients'](el, formattedFilter)) {
+    //   isSubset = false;
+    // }
+   
+    // for (const t of types) {
+    //   // Si l'élément ne satisfait pas un des filtres, le marquer comme non-sous-ensemble
+    //   if (!filterFunction[t](el, formattedFilter, t)) {
+    //     isSubset = false;
+    //     break;
+    //   }
+    // }
+  
+
+    // Si l'élément satisfait tous les filtres, l'ajouter à l'ensemble
+    if (isSubset) {
+      resourceSubset.push(el);
+    }
+  }
+  console.log('>>>>>>>>>', resourceSubset)
+  return resourceSubset;
+}
+
+// const filterBySecondary = (resources, filter, type) {
+//   let resourceSubset = [];
+//   const formattedFilter = filter.toLowerCase();
+//   for (const el of resources) {
+//     if (filterFunction[type](el, formattedFilter, re)) {
+//       resourceSubset.push(el)
+//       break
+//     }
+//   }
+// }
 
 const filterFunction = {
   ingredients: filterResourceByIngredients,

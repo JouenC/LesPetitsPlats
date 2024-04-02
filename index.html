@@ -35,27 +35,45 @@
     <section class="recipes">
       <div class="flex">
         <div class="dropdown select_ingredients">
+          <input
+              type="search"
+              id="search_ingredient"
+              name="q"
+              placeholder="Rechercher un ingrédient, ..."
+              aria-label="Rechercher parmi les recettes du site"
+              minlength="3"
+              pattern="[A-z]"/>
+          <button><img class="button" src="data/logo/Loop CTA.png" alt="Rechercher" aria-label="Lancer la recherche"></button>
           <select class="dropdown_select dropdown_ingredients" aria-label="dropdown for media sorting">
             <option class="dropdown_title">Ingrédients</option>
-            <!-- <option class="dropdown_select" value="Popularité" aria-label="sorting for popularity"> Popularité </option>
-            <option class="dropdown_select" value="Date" aria-label="sorting for date"> Date </option>
-            <option class="dropdown_select" value="Titre" aria-label="sorting for title"> Titre </option> -->
           </select>
         </div>
-        <div class="dropdown">
+        <div class="dropdown select_appliance">
+          <input
+              type="search"
+              id="search_appliance"
+              name="q"
+              placeholder="Rechercher un appareil, ..."
+              aria-label="Rechercher parmi les recettes du site"
+              minlength="3"
+              pattern="[A-z]"/>
+          <button><img class="button" src="data/logo/Loop CTA.png" alt="Rechercher" aria-label="Lancer la recherche"></button>
           <select class="dropdown_select dropdown_appliance" aria-label="dropdown for media sorting">
             <option class="dropdown_title">Appareils</option>
-            <!-- <option class="dropdown_select" value="Popularité" aria-label="sorting for popularity"> Popularité </option>
-            <option class="dropdown_select" value="Date" aria-label="sorting for date"> Date </option>
-            <option class="dropdown_select" value="Titre" aria-label="sorting for title"> Titre </option> -->
           </select>
         </div>
-        <div class="dropdown">
+        <div class="dropdown select_ustensiles">
+          <input
+              type="search"
+              id="search_ustensile"
+              name="q"
+              placeholder="Rechercher un ustensile, ..."
+              aria-label="Rechercher parmi les recettes du site"
+              minlength="3"
+              pattern="[A-z]"/>
+          <button><img class="button" src="data/logo/Loop CTA.png" alt="Rechercher" aria-label="Lancer la recherche"></button>
           <select class="dropdown_select dropdown_ustensils" aria-label="dropdown for media sorting">
             <option class="dropdown_title">Ustensiles</option>
-            <!-- <option class="dropdown_select" value="Popularité" aria-label="sorting for popularity"> Popularité </option>
-            <option class="dropdown_select" value="Date" aria-label="sorting for date"> Date </option>
-            <option class="dropdown_select" value="Titre" aria-label="sorting for title"> Titre </option> -->
           </select>
         </div>
       </div>

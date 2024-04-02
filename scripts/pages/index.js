@@ -1,9 +1,12 @@
+const selectIngredient = document.querySelector('.dropdown_ingredients')
+const selectAppliance = document.querySelector('.dropdown_appliance')
+const selectUstensils = document.querySelector('.dropdown_ustensils')
+
+
 // Create a new list
 let allRecipes = recipes
 const recipesContainer = document.querySelector(".recipes_cards")
 
-// ??? dropdown
-const dropdownIngredient = document.querySelector(".dropdown_ingredients")
 
 // Count number of recipes
 function recipesCount(numberOfRecipes) {
@@ -14,11 +17,6 @@ function recipesCount(numberOfRecipes) {
 
 // Create cards
 function recipesCard(recipes) {
-
-    // ??? dropdown
-    const dropdownIngredient = document.querySelector(".dropdown_ingredients")
-    const dropdownAppliance = document.querySelector(".dropdown_appliance")
-    const dropdownUstensils = document.querySelector(".dropdown_ustensils")
     
     let tempIngredients = []
     let tempAppliance = []
@@ -30,6 +28,7 @@ function recipesCard(recipes) {
         // Recette Courante
         const currentRecipe = recipes[i]
         // console.log(currentRecipe.name)
+
         // Create article for each cards
         const article = document.createElement('article')
 
@@ -45,7 +44,7 @@ function recipesCard(recipes) {
             tempIngredients.push(ingredient.toLowerCase())
 
             // Create dropdown option for ingredients
-            dropdownIngredient.innerHTML += `
+            selectIngredient.innerHTML += `
                 <option class="dropdown_select dropdown_ingredients_option" value="${ingredient}" aria-label="sorting for ${ingredient}"> ${ingredient} </option>
             `
         }
@@ -60,8 +59,6 @@ function recipesCard(recipes) {
             if (tempUstensils.includes(recipes[i].ustensils[j].toLowerCase())) continue
             tempUstensils.push(recipes[i].ustensils[j].toLowerCase())
         }
-
-        // console.log(">", recipes[i].name)
 
         // Cards HTML
         article.innerHTML = `
@@ -95,7 +92,7 @@ function recipesCard(recipes) {
 
     // Create dropdown option for appliance
     tempAppliance.forEach((element) => 
-        dropdownAppliance.innerHTML += `
+        selectAppliance.innerHTML += `
             <option class="dropdown_select dropdown_appliance_option" value="${element}" aria-label="sorting for ${element}"> ${element} </option>
         `
     )
@@ -103,16 +100,30 @@ function recipesCard(recipes) {
 
     // Create dropdown option for ustensils
     tempUstensils.forEach((element) => 
-        dropdownUstensils.innerHTML += `
-            <option class="dropdown_select dropdown_appliance_option" value="${element}" aria-label="sorting for ${element}"> ${element} </option>
+        selectUstensils.innerHTML += `
+            <option class="dropdown_select dropdown_ustensils_option" value="${element}" aria-label="sorting for ${element}"> ${element} </option>
         `
     )
     tempAppliance = []
 }
 
+// Clear dropdown
+const clearRecipes = () => {
+
+    // Efface les cards
+    const recipesContainer = document.querySelector(".recipes_cards")
+    recipesContainer.innerHTML = ``
+
+    // Efface les tags
+    selectIngredient.innerHTML = ``
+    selectAppliance.innerHTML = ``
+    selectUstensils.innerHTML = ``
+}
+
 // Display page
 function displayRecipes(recipes) {
    
+    clearRecipes()
     recipesCount(recipes.length)
     recipesCard(recipes)  
 }
