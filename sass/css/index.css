@@ -36,14 +36,14 @@ nav {
   font-family: "Manerope", Arial, Helvetica, sans-serif;
 }
 
-button {
+.button {
   border: none;
   position: relative;
   right: 69px;
   top: 22px;
   background-color: white;
 }
-button :hover {
+.button :hover {
   cursor: pointer;
 }
 
@@ -56,17 +56,8 @@ button :hover {
 
 .flex {
   display: flex;
-}
-
-.dropdown_select {
-  width: 195px;
-  height: 56px;
-  border-radius: 11px;
-  border: none;
-  font-size: 16px;
-  font-family: "Manerope", Arial, Helvetica, sans-serif;
-  padding-left: 15px;
-  margin-right: 50px;
+  justify-content: space-between;
+  width: 680px;
 }
 
 .recepice_count {

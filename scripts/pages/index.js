@@ -27,7 +27,6 @@ function recipesCard(recipes) {
 
         // Recette Courante
         const currentRecipe = recipes[i]
-        // console.log(currentRecipe.name)
 
         // Create article for each cards
         const article = document.createElement('article')
@@ -88,6 +87,7 @@ function recipesCard(recipes) {
         recipesContainer.appendChild(article)
     }
     
+    allIngredients = tempIngredients
     tempIngredients = []
 
     // Create dropdown option for appliance
@@ -96,6 +96,8 @@ function recipesCard(recipes) {
             <option class="dropdown_select dropdown_appliance_option" value="${element}" aria-label="sorting for ${element}"> ${element} </option>
         `
     )
+
+    allAppliances = tempAppliance
     tempAppliance = []
 
     // Create dropdown option for ustensils
@@ -104,7 +106,11 @@ function recipesCard(recipes) {
             <option class="dropdown_select dropdown_ustensils_option" value="${element}" aria-label="sorting for ${element}"> ${element} </option>
         `
     )
-    tempAppliance = []
+
+    allUstensils = tempUstensils
+    tempUstensils = []
+
+    return allIngredients, allAppliances, allUstensils
 }
 
 // Clear dropdown
@@ -120,12 +126,52 @@ const clearRecipes = () => {
     selectUstensils.innerHTML = ``
 }
 
+function optionListener () {
+    const optionIngredient = [...document.querySelectorAll(".dropdown_ingredients_option")]
+    const optionAppliance = [...document.querySelectorAll(".dropdown_appliance_option")]
+    const optionUstensils = [...document.querySelectorAll(".dropdown_ustensils_option")]
+
+    // Appel de la fonction searchDropdown lors d'un clique dans les options
+    optionIngredient.forEach(option => {
+        option.addEventListener('click', searchDropdown)
+    })
+
+    optionAppliance.forEach(option => {
+        option.addEventListener('click', searchDropdown)
+    })
+
+    optionUstensils.forEach(option => {
+        option.addEventListener('click', searchDropdown)
+    })
+}
+
+function deletListener() {
+    // Pour déselectionner un tag
+    const deletIngredient = [...document.querySelectorAll(".element_ingredient")]
+    const deletAppliance = [...document.querySelectorAll(".element_appliance")]
+    const deletUstensils = [...document.querySelectorAll(".element_ustensils")]
+
+    deletIngredient.forEach(p => {
+        p.addEventListener('click', () =>  {test(),  deletItem(tagsToUpdate, p.innerHTML, "ingredients")} )
+    })
+
+    deletAppliance.forEach(p => {
+        p.addEventListener('click', () => {test(),  deletItem(tagsToUpdate, p.innerHTML, "appliance")})
+    })
+
+    deletUstensils.forEach(p => {
+        p.addEventListener('click', () => {test(),  deletItem(tagsToUpdate, p.innerHTML, "ustensils")} )
+    })
+}
+
 // Display page
 function displayRecipes(recipes) {
    
     clearRecipes()
     recipesCount(recipes.length)
     recipesCard(recipes)  
+    optionListener()
+    deletListener()
 }
 
 // Call display page

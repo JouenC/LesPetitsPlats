@@ -3,6 +3,7 @@
     <head>
         <link href="css/main.css" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/4d7356f1b2.js" crossorigin="anonymous"></script>
         <!-- <link href="https://fonts.googleapis.com/css?family=Manerope" rel="stylesheet"> -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +27,7 @@
                 aria-label="Rechercher parmi les recettes du site"
                 minlength="3"
                 pattern="[A-z]"/>
-              <button><img class="button" src="data/logo/Loop CTA.png" alt="Rechercher" aria-label="Lancer la recherche"></button>
+              <button class="button"><img src="data/logo/Loop CTA.png" alt="Rechercher" aria-label="Lancer la recherche"></button>
             </div>
           </form>
       </nav>    
@@ -35,59 +36,76 @@
     <section class="recipes">
       <div class="flex">
         <div class="dropdown select_ingredients">
-          <input
-              type="search"
-              id="search_ingredient"
-              name="q"
-              placeholder="Rechercher un ingrédient, ..."
-              aria-label="Rechercher parmi les recettes du site"
-              minlength="3"
-              pattern="[A-z]"/>
-          <button><img class="button" src="data/logo/Loop CTA.png" alt="Rechercher" aria-label="Lancer la recherche"></button>
-          <select class="dropdown_select dropdown_ingredients" aria-label="dropdown for media sorting">
-            <option class="dropdown_title">Ingrédients</option>
-          </select>
+          <button id="btn_ingredient" class="dropbtn">Ingrédients <i class="fa-light fa-chevron-down"></i></button>
+          <div id="myDropdown_ingredients" class="dropdown_content" aria-label="dropdown for media sorting">
+            <div class="dropdown_title">Ingrédients <i class="fa-light fa-chevron-up"></i></div>
+            <input
+                type="search"
+                id="search_ingredient"
+                class="input_dropdown"
+                name="q"
+                placeholder="Rechercher un ingrédient, ..."
+                aria-label="Rechercher parmi les recettes du site"
+                minlength="3"
+                pattern="[A-z]"/>
+            <button class="button_dropdown button_dropdown_ingredients"><img src="data/logo/Group 4.png" alt="Rechercher" aria-label="Lancer la recherche"></button>
+            <div class="dropdown_select dropdown_ingredients" aria-label="dropdown for media sorting">
+              <!-- <option class="dropdown_title">Ingrédients</option> -->
+            </div>
+          </div>
         </div>
         <div class="dropdown select_appliance">
-          <input
-              type="search"
-              id="search_appliance"
-              name="q"
-              placeholder="Rechercher un appareil, ..."
-              aria-label="Rechercher parmi les recettes du site"
-              minlength="3"
-              pattern="[A-z]"/>
-          <button><img class="button" src="data/logo/Loop CTA.png" alt="Rechercher" aria-label="Lancer la recherche"></button>
-          <select class="dropdown_select dropdown_appliance" aria-label="dropdown for media sorting">
-            <option class="dropdown_title">Appareils</option>
-          </select>
+          <button id="btn_appliance" class="dropbtn">Appareils <i class="fa-light fa-chevron-down"></i></button>
+          <div id="myDropdown_appliance" class="dropdown_content" aria-label="dropdown for media sorting">
+            <div class="dropdown_title">Appareils <i class="fa-light fa-chevron-up"></i></div>
+            <input
+                type="search"
+                id="search_appliance"
+                class="input_dropdown"
+                name="q"
+                placeholder="Rechercher un appareil, ..."
+                aria-label="Rechercher parmi les recettes du site"
+                minlength="3"
+                pattern="[A-z]"/>
+            <button class="button_dropdown button_dropdown_appliance"><img src="data/logo/Group 4.png" alt="Rechercher" aria-label="Lancer la recherche"></button>
+            <div class="dropdown_select dropdown_appliance " aria-label="dropdown for media sorting">
+              <!-- <option class="dropdown_title">Appareils</option> -->
+            </div>
+          </div>  
         </div>
         <div class="dropdown select_ustensiles">
-          <input
-              type="search"
-              id="search_ustensile"
-              name="q"
-              placeholder="Rechercher un ustensile, ..."
-              aria-label="Rechercher parmi les recettes du site"
-              minlength="3"
-              pattern="[A-z]"/>
-          <button><img class="button" src="data/logo/Loop CTA.png" alt="Rechercher" aria-label="Lancer la recherche"></button>
-          <select class="dropdown_select dropdown_ustensils" aria-label="dropdown for media sorting">
-            <option class="dropdown_title">Ustensiles</option>
-          </select>
+          <button id="btn_ustensils" class="dropbtn">Ustensiles <i class="fa-light fa-chevron-down"></i></button>
+          <div id="myDropdown_ustensils" class="dropdown_content" aria-label="dropdown for media sorting">
+            <div class="dropdown_title">Ustensiles <i class="fa-light fa-chevron-up"></i></div>
+            <input
+                type="search"
+                id="search_ustensile"
+                class="input_dropdown"
+                name="q"
+                placeholder="Rechercher un ustensile, ..."
+                aria-label="Rechercher parmi les recettes du site"
+                minlength="3"
+                pattern="[A-z]"/>
+            <button class="button_dropdown button_dropdown_ustensils"><img src="data/logo/Group 4.png" alt="Rechercher" aria-label="Lancer la recherche"></button>
+            <div class="dropdown_select dropdown_ustensils" aria-label="dropdown for media sorting">
+              <!-- <option class="dropdown_title">Ustensiles</option> -->
+            </div>
+          </div>
         </div>
       </div>
       <div class="recepice_count">1500 recettes</div>
     </section>
 
     <section class="recipes_cards"></section>
+    <div class="overlay">overlay</div>
     
     
     <script src="data/recettes.js"></script>
+    <script src="scripts/templates/algo.js"></script>
     <script src="scripts/pages/index.js"></script>
     <script src="scripts/templates/count.js"></script>
-    <script src="scripts/templates/algo.js"></script>
     <script src="scripts/utils/index.js"></script>
+    <script src="scripts/templates/dropdown.js"></script>
 </body>
 
 </html>

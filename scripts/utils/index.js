@@ -50,8 +50,10 @@ const filterResourceByAppliance = (el, filter) => {
   if (Array.isArray(filter)) {
     appliancesFilter = filter
   }
-  appliancesFilter.includes(el.appliance.toLowerCase());
+  if (!appliancesFilter.includes(el.appliance.toLowerCase())) return false;
+  return true
 }
+
 const filterResourceByString = (el, filter, researchPool) => el[researchPool].toLowerCase().includes(filter);
 
 // Search by time.
