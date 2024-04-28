@@ -4,18 +4,6 @@
   z-index: 2;
 }
 
-.dropdown_select {
-  width: 195px;
-  height: 56px;
-  border-radius: 11px;
-  border: none;
-  font-size: 16px;
-  font-family: "Manerope", Arial, Helvetica, sans-serif;
-  padding-left: 15px;
-  margin-right: 50px;
-  background-color: #f1f1f1;
-}
-
 /* Style du bouton du dropdown */
 .dropbtn {
   padding: 10px;
@@ -24,7 +12,6 @@
   cursor: pointer;
   width: 195px;
   height: 56px;
-  border-radius: 11px;
   font-size: 16px;
   font-family: "Manerope", Arial, Helvetica, sans-serif;
   margin-right: 50px;
@@ -40,17 +27,14 @@
   position: fixed;
   top: 0;
   display: none;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0);
   z-index: 1;
 }
 
 .dropdown_title {
-  padding: 10px;
-  padding-left: 10px;
-  width: 195px;
+  padding: 25px;
   font-size: 16px;
   font-family: "Manerope", Arial, Helvetica, sans-serif;
-  padding-left: 15px;
   display: flex;
   justify-content: space-between;
 }
@@ -61,21 +45,32 @@
   position: absolute;
   top: 714px;
   background-color: #f1f1f1;
-  min-width: 270px;
+  width: 195px;
   min-height: 550px;
   z-index: 3;
-  overflow-y: auto; /* Permet le défilement si le contenu est trop long */
   border-radius: 11px;
+}
+
+.dropdown_tags {
+  overflow-y: auto; /* Permet le défilement si le contenu est trop long */
+  height: 425px;
+}
+.dropdown_tags :hover {
+  background-color: #fc7303;
 }
 
 /* Style de l'option du dropdown */
 .dropdown_select {
-  padding: 10px;
+  height: 50px;
+  border-radius: 11px;
+  border: none;
+  font-family: "Manerope", Arial, Helvetica, sans-serif;
+  padding: 10px 10PX 5PX 15px;
   font-size: 16px;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   cursor: pointer;
-}
-.dropdown_select :hover {
-  background-color: #fc7303;
 }
 
 .show {
@@ -84,12 +79,13 @@
 
 .input_dropdown {
   margin-left: 15px;
+  margin-bottom: 15px;
   padding: 5px;
-  width: 200px;
+  width: 125px;
 }
 
 .button_dropdown {
   position: absolute;
   border: none;
-  left: 190px;
+  left: 140px;
 }/*# sourceMappingURL=dropdown.css.map */

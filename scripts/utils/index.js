@@ -109,12 +109,6 @@ const filterBy = (resources, filter, types) => {
 
 const filterByMulti = (resources, filters) => {
   const resourceSubset = [];
-  // const formattedFilter = filters.map(filter => filter.toLowerCase());
-   
-  // // Vérifier si les ressources sont vides ou si aucun type n'est spécifié
-  // if (resources.length === 0 || types.length === 0) {
-  //   return resourceSubset; // Retourner un tableau vide si c'est le cas
-  // }
 
   for (const el of resources) {
     let isSubset = true; // Pour vérifier si l'élément satisfait tous les filtres
@@ -128,20 +122,7 @@ const filterByMulti = (resources, filters) => {
         break;
       }
     }
-
-    // if (!filterFunction['ingredients'](el, formattedFilter)) {
-    //   isSubset = false;
-    // }
-   
-    // for (const t of types) {
-    //   // Si l'élément ne satisfait pas un des filtres, le marquer comme non-sous-ensemble
-    //   if (!filterFunction[t](el, formattedFilter, t)) {
-    //     isSubset = false;
-    //     break;
-    //   }
-    // }
   
-
     // Si l'élément satisfait tous les filtres, l'ajouter à l'ensemble
     if (isSubset) {
       resourceSubset.push(el);

@@ -17,14 +17,17 @@ function searchBar() {
 
         case 'search_ingredient':
             searchRecipesIngredients(searchWord)
+            optionListener ()
             break
 
         case 'search_appliance':
             searchRecipesAppliances(searchWord)
+            optionListener ()
             break
 
         case 'search_ustensile':
             searchRecipesUstensiles(searchWord)
+            optionListener ()
             break
     }    
 }
@@ -86,7 +89,7 @@ function searchRecipesIngredients(search) {
                 <option class="dropdown_select dropdown_ingredients_option" value="${item}" aria-label="sorting for ${item}"> ${item} </option>
             `;
         });
-    } 
+    }
 }
 
 function searchRecipesAppliances(search) {
@@ -292,26 +295,12 @@ function searchDropdown(type) {
         deletItem(tagsToUpdate, selectValue, type);
         focusConstruct(tagsToUpdate, filterType);
     }
-
-    // Mettre à jour les éléments de focus et les tags
-    // focusConstruct(ingredientTags, ustensilTags, applianceTags);
-
-    // // Créer un objet contenant les tags
-    // const tags = {
-    //     ingredients: ingredientTags,
-    //     ustensils: ustensilTags,
-    //     appliance: applianceTags
-    // };
-
-    // // Filtrer les recettes en fonction des tags
-    // filteredByTag = filterByMulti(allRecipes, tags);
-
-    // // Afficher les recettes filtrées
-    // displayRecipes(filteredByTag);
     test()
 }
 
 function test() {
+
+    console.log("!!!!!!!!!!!!!!!!!!!!")
     // Créer un objet contenant les tags
     const tags = {
         ingredients: ingredientTags,

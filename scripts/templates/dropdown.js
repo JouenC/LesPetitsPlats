@@ -48,25 +48,6 @@ const dropdownClickEvent = (dropdown) => {
 const dropdownController = (dropdown) => dropdown.addEventListener("click", () => dropdownClickEvent(dropdown));
 [...document.querySelectorAll(".dropbtn")].forEach(dropdownController);
 
-// Ajoutez des écouteurs d'événements pour chaque bouton correspondant
-// document.getElementById("btn_ingredient").addEventListener("click", function(e) {
-//     e.stopPropagation();
-//     closeUnusedDropDowns("myDropdown_ingredients");
-//     openDropdown("btn_ingredient", "myDropdown_ingredients");
-// });
-
-// document.getElementById("btn_appliance").addEventListener("click", function(e) {
-//     e.stopPropagation();
-//     closeUnusedDropDowns("myDropdown_appliance");
-//     openDropdown("btn_appliance", "myDropdown_appliance");
-// });
-
-// document.getElementById("btn_ustensils").addEventListener("click", function(e) {
-//     e.stopPropagation();
-//     closeUnusedDropDowns("myDropdown_ustensils");
-//     openDropdown("btn_ustensils", "myDropdown_ustensils");
-// });
-
 const overlay = document.querySelector(".overlay")
 
 // Fonction pour fermer le dropdown si l'utilisateur clique en dehors de celui-ci
@@ -76,3 +57,7 @@ overlay.addEventListener("click", function() {
         overlay.classList.remove("show");
     }
 });
+
+[...document.querySelectorAll(".dropdown_title")].forEach(dropdown => {
+    dropdown.addEventListener("click", () => dropdownClickEvent(dropdown))
+})

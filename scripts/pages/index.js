@@ -152,8 +152,12 @@ function deletListener() {
     const deletUstensils = [...document.querySelectorAll(".element_ustensils")]
 
     deletIngredient.forEach(p => {
-        p.addEventListener('click', () =>  {test(),  deletItem(tagsToUpdate, p.innerHTML, "ingredients")} )
+        p.addEventListener('click', () =>  {
+            test();
+            deletItem(tagsToUpdate, p.innerHTML, "ingredients")
+        } )
     })
+    
 
     deletAppliance.forEach(p => {
         p.addEventListener('click', () => {test(),  deletItem(tagsToUpdate, p.innerHTML, "appliance")})
@@ -171,7 +175,7 @@ function displayRecipes(recipes) {
     recipesCount(recipes.length)
     recipesCard(recipes)  
     optionListener()
-    deletListener()
+    // deletListener()
 }
 
 // Call display page
