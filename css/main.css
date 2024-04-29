@@ -157,6 +157,10 @@ nav {
   left: 140px;
 }
 
+.search_logo {
+  width: 30px;
+}
+
 .recipes_cards {
   display: flex;
   flex-wrap: wrap;
