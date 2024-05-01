@@ -185,4 +185,4 @@ function displayRecipes(recipes) {
 }
 
 // Call display page
-displayRecipes(allRecipes)de
+displayRecipes(allRecipes)
