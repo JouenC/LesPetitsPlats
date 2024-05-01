@@ -81,7 +81,7 @@
   margin-left: 15px;
   margin-bottom: 15px;
   padding: 5px;
-  width: 125px;
+  width: 170px;
 }
 
 .button_dropdown {
@@ -91,5 +91,20 @@
 }
 
 .search_logo {
-  width: 30px;
+  position: absolute;
+  top: 7px;
+  left: 27px;
+  background-color: white;
+  color: gray;
+}
+
+.element_ingredient,
+.element_appliance,
+.element_ustensils {
+  font-family: "Manerope", Arial, Helvetica, sans-serif;
+  padding: 10px 10PX 5PX 15px;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
 }/*# sourceMappingURL=dropdown.css.map */

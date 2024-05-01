@@ -153,18 +153,24 @@ function deletListener() {
 
     deletIngredient.forEach(p => {
         p.addEventListener('click', () =>  {
-            test();
-            deletItem(tagsToUpdate, p.innerHTML, "ingredients")
+            deletItem(tagsToUpdate, p.innerHTML, "ingredients");
+            test()
         } )
     })
     
 
     deletAppliance.forEach(p => {
-        p.addEventListener('click', () => {test(),  deletItem(tagsToUpdate, p.innerHTML, "appliance")})
+        p.addEventListener('click', () => {
+            deletItem(tagsToUpdate, p.innerHTML, "appliance");
+            test()
+        })
     })
 
     deletUstensils.forEach(p => {
-        p.addEventListener('click', () => {test(),  deletItem(tagsToUpdate, p.innerHTML, "ustensils")} )
+        p.addEventListener('click', () => {
+            deletItem(tagsToUpdate, p.innerHTML, "ustensils");
+            test()
+        } )
     })
 }
 
