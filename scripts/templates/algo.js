@@ -8,7 +8,10 @@ let filterRecipes = []
 function searchBar() {
     // Récupérer la valeur saisie dans la barre de recherche
     const searchWord = this.value.trim().toLowerCase()
-    
+
+    // Supprimer tous les caractères non alphabétiques de la chaîne de recherche
+    searchWord = searchWord.replace(/[^a-z]/g, '');
+
     switch (this.id) {
 
         case 'search':
