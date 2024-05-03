@@ -7,7 +7,7 @@ let filterRecipes = []
 // Filtre les entrées dans la barre de recherche
 function searchBar() {
     // Récupérer la valeur saisie dans la barre de recherche
-    const searchWord = this.value.trim().toLowerCase()
+    let searchWord = this.value.trim().toLowerCase()
 
     // Supprimer tous les caractères non alphabétiques de la chaîne de recherche
     searchWord = searchWord.replace(/[^a-z]/g, '');
@@ -288,6 +288,7 @@ function searchDropdown(type) {
             break;
     }
 
+    console.log(tagsToUpdate, selectValue)
     // Vérifier si la valeur sélectionnée est déjà présente dans les tags
     if (!tagsToUpdate.includes(selectValue)) {
         // Si la valeur n'est pas présente, l'ajouter
@@ -313,8 +314,9 @@ function test() {
 
     // Filtrer les recettes en fonction des tags
     filteredByTag = filterByMulti(allRecipes, tags);
+    console.log("?????????????", filteredByTag, tags.ingredients)
 
     // Afficher les recettes filtrées
-    displayRecipes(filteredByTag)
+    displayRecipes(filteredByTag, tags)
     // deletItem(tagsToUpdate, p.innerHTML, type);
 }

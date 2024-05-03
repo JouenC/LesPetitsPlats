@@ -16,7 +16,7 @@ function recipesCount(numberOfRecipes) {
 }
 
 // Create cards
-function recipesCard(recipes) {
+function recipesCard(recipes, tags) {
     
     let tempIngredients = []
     let tempAppliance = []
@@ -42,10 +42,20 @@ function recipesCard(recipes) {
             if (tempIngredients.includes(ingredient.toLowerCase())) continue
             tempIngredients.push(ingredient.toLowerCase())
 
-            // Create dropdown option for ingredients
+            if(tags) {
+                console.log("?????????", ingredient)
+            }
+
+            if(tags && tags.ingredients.includes(ingredient.toLowerCase())) {
+                continue
+            } else {
+                // Create dropdown option for ingredients
             selectIngredient.innerHTML += `
                 <option class="dropdown_select dropdown_ingredients_option" value="${ingredient}" aria-label="sorting for ${ingredient}"> ${ingredient} </option>
             `
+            }
+            
+            
         }
         
         // Creation d'un tableau contenant les appliances
@@ -90,22 +100,30 @@ function recipesCard(recipes) {
     allIngredients = tempIngredients
     tempIngredients = []
 
+    
+
     // Create dropdown option for appliance
-    tempAppliance.forEach((element) => 
+    tempAppliance.forEach((element) => {
+        if (tags && tags.appliance.includes(element)) {
+            return;
+        }
         selectAppliance.innerHTML += `
             <option class="dropdown_select dropdown_appliance_option" value="${element}" aria-label="sorting for ${element}"> ${element} </option>
         `
-    )
+    })
 
     allAppliances = tempAppliance
     tempAppliance = []
 
     // Create dropdown option for ustensils
-    tempUstensils.forEach((element) => 
+    tempUstensils.forEach((element) => {
+        if (tags && tags.ustensils.includes(element)) {
+            return;
+        }
         selectUstensils.innerHTML += `
             <option class="dropdown_select dropdown_ustensils_option" value="${element}" aria-label="sorting for ${element}"> ${element} </option>
-        `
-    )
+        `;
+    });
 
     allUstensils = tempUstensils
     tempUstensils = []
@@ -175,11 +193,11 @@ function deletListener() {
 }
 
 // Display page
-function displayRecipes(recipes) {
+function displayRecipes(recipes, tags) {
    
     clearRecipes()
     recipesCount(recipes.length)
-    recipesCard(recipes)  
+    recipesCard(recipes, tags)  
     optionListener()
     // deletListener()
 }
