@@ -1,22 +1,10 @@
 // Fonction pour afficher le dropdown au clic sur le bouton
-/**
- * The function `openDropdown` adds the "show" class to a specified dropdown element and overlay.
- * @param {string} dropdownId - The `dropdownId` parameter in the `openDropdown` function is a string that
- * represents the ID of the dropdown element that you want to open.
- */
 function openDropdown(dropdownId) {
     document.getElementById(dropdownId).classList.add("show");
     document.querySelector(".overlay").classList.add("show");
 }
 
-/**
- * The function `closeUnusedDropDowns` closes all dropdowns except for the one specified as
- * `usedDropdown`.
- * @param {string} usedDropdown [usedDropdown] - The `usedDropdown` parameter in the `closeUnusedDropDowns` function is used
- * to specify the dropdown that should remain open while closing all other dropdowns. If a
- * `usedDropdown` is provided, all dropdowns except the one with the specified ID will have the "show"
- * class removed to
- */
+// Fermeture des dropdowns
 const closeUnusedDropDowns = (usedDropdown = undefined) => {
     const dropdowns = [...document.querySelectorAll(".dropdown_content")];
 
@@ -34,17 +22,13 @@ const closeUnusedDropDowns = (usedDropdown = undefined) => {
     });
 }
 
-/**
- * The function `dropdownClickEvent` closes any unused dropdowns and opens the dropdown associated with
- * the clicked element.
- * @param {Element} dropdown - The `dropdown` parameter in the `dropdownClickEvent` function is a reference to
- * the dropdown element that was clicked on by the user.
- */
+// Ferme les dropdowns et ouvre celui où à lui l'évènement
 const dropdownClickEvent = (dropdown) => {
     closeUnusedDropDowns(dropdown.nextElementSibling.id);
     openDropdown(dropdown.nextElementSibling.id);
 }
 
+// Ecouteur sur les boutons des dropdowns
 const dropdownController = (dropdown) => dropdown.addEventListener("click", () => dropdownClickEvent(dropdown));
 [...document.querySelectorAll(".dropbtn")].forEach(dropdownController);
 
@@ -58,6 +42,7 @@ overlay.addEventListener("click", function() {
     }
 });
 
+// Ecouteur sur les titres des dropdowns
 [...document.querySelectorAll(".dropdown_title")].forEach(dropdown => {
     dropdown.addEventListener("click", () => dropdownClickEvent(dropdown))
 })

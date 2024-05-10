@@ -20,17 +20,17 @@ function searchBar() {
 
         case 'search_ingredient':
             searchRecipesIngredients(searchWord)
-            optionListener ()
+            optionListener()
             break
 
         case 'search_appliance':
             searchRecipesAppliances(searchWord)
-            optionListener ()
+            optionListener()
             break
 
         case 'search_ustensile':
             searchRecipesUstensiles(searchWord)
-            optionListener ()
+            optionListener()
             break
     }    
 }
@@ -45,7 +45,6 @@ function searchRecipes(search) {
             // Vérifier si la saisie est valide (au moins 3 caractères)
             if (search.length < 2) {
                 displayRecipes(allRecipes)
-                console.log("Veuillez saisir au moins 3 caractères.")
                 return
             }
     
@@ -75,7 +74,6 @@ function searchRecipesIngredients(search) {
     // Vérifier si la saisie est valide (au moins 3 caractères)
     if (search.length < 2) {
         selectIngredient.innerHTML = "";
-        console.log("Veillez saisir plus de 2 caractères")
         allIngredients.forEach(item => {
             // Create dropdown option for ingredients
             selectIngredient.innerHTML += `
@@ -95,6 +93,7 @@ function searchRecipesIngredients(search) {
     }
 }
 
+// Filtre les entrées dans la barre de appliances
 function searchRecipesAppliances(search) {
     
     // Utiliser la fonction searchTag et récupérer la valeur retournée dans tempItem
@@ -114,7 +113,6 @@ function searchRecipesAppliances(search) {
     // Vérifier si la saisie est valide (au moins 3 caractères)
     if (search.length < 2) {
         selectAppliance.innerHTML = ""
-        console.log("Veillez saisir plus de 2 caractères")
         allAppliances.forEach(item => {
             // Create dropdown option for ingredients
             selectAppliance.innerHTML += `
@@ -134,6 +132,7 @@ function searchRecipesAppliances(search) {
     }
 }
 
+// Filtre les entrées dans la barre de ustensils
 function searchRecipesUstensiles(search) {
 
     // Utiliser la fonction searchTag et récupérer la valeur retournée dans tempItem
@@ -153,7 +152,6 @@ function searchRecipesUstensiles(search) {
     // Vérifier si la saisie est valide (au moins 3 caractères)
     if (search.length < 2) {
         selectUstensils.innerHTML = ""
-        console.log("Veillez saisir plus de 2 caractères")
         allUstensils.forEach(item => {
             // Create dropdown option for ingredients
             selectUstensils.innerHTML += `
@@ -184,7 +182,6 @@ const searchTag = (searchZone, searchItem) => {
         }   
     });
 
-    console.log(tempItem)    
     return tempItem
 }
 
@@ -197,15 +194,8 @@ searchElements.forEach(element => {
 });
 
 // Delete item from focusRecipes, focusAppliance or focusUstensils
-function deletItem(tableau, valeur, type) {
-
-    // Search index
-    const index = tableau.indexOf(valeur)
-
-    // Delete index
-    tableau.splice(index, 1) 
-    console.log("La valeur", valeur, "a été supprimée du tableau.")
-    focusConstruct(tableau, type)
+function deletItem(tags, value, type) {
+    tags[type] = tags[type].filter(item => item !== value);
 }
 
 // Element for focusConstruct
@@ -218,12 +208,14 @@ divUstensil.className = "focus focus_ustensile"
 
 // Display select tag ingredient
 function focusConstruct(focus, type) {
+
     let focusElement
+
     switch (type) {
         case 'ingredients':
             focusElement = document.querySelector('.button_dropdown_ingredients')
                 divIngredient.innerHTML = ``
-                focus.forEach((element) => 
+                focus.ingredients.forEach((element) => 
                     divIngredient.innerHTML += `
                         <p class="element_ingredient">${element}<p>
                     `,
@@ -234,7 +226,7 @@ function focusConstruct(focus, type) {
         case 'appliance':
             focusElement = document.querySelector('.button_dropdown_appliance')
                 divAppliance.innerHTML = ``
-                focus.forEach((element) => 
+                focus.appliance.forEach((element) => 
                     divAppliance.innerHTML += `
                         <p class="element_appliance">${element}<p>
                     `,
@@ -245,7 +237,7 @@ function focusConstruct(focus, type) {
         case 'ustensils':
             focusElement = document.querySelector('.button_dropdown_ustensils')
                 divUstensil.innerHTML = ``
-                focus.forEach((element) => 
+                focus.ustensils.forEach((element) => 
                     divUstensil.innerHTML += `
                         <p class="element_ustensils">${element}<p>
                     `,
@@ -261,62 +253,50 @@ function focusConstruct(focus, type) {
     deletListener()     
 }
 
-let tagsToUpdate = []; // Tableau pour stocker les tags à mettre à jour
+let tagsToUpdate = {ingredients: [], appliance: [], ustensils: [], }; // Tableau pour stocker les tags à mettre à jour
 
+// Construit la liste des tags selectionnés
 function searchDropdown(type) {
-    console.log(this, type)
     const selectValue = this.value.trim().toLowerCase(); // Valeur sélectionnée dans le dropdown
     
     let filterType = ''; // Type de filtre à mettre à jour
-
     // Déterminer quel tableau de tags mettre à jour en fonction du type de dropdown
     switch (this.className) {
         case 'dropdown_select dropdown_ingredients_option':
-            tagsToUpdate = ingredientTags;
-            filterType = 'ingredients';
+            if (!tagsToUpdate.ingredients.includes(selectValue)) {
+                tagsToUpdate.ingredients.push(selectValue); 
+                filterType = 'ingredients';
+            }
             break;
         case 'dropdown_select dropdown_appliance_option':
-            console.log("Hello Appliance!", applianceTags);
-            tagsToUpdate = applianceTags;
-            filterType = 'appliance';
+            if (!tagsToUpdate.appliance.includes(selectValue)) {
+                tagsToUpdate.appliance.push(selectValue); 
+                filterType = 'appliance';
+            }
             break;
         case 'dropdown_select dropdown_ustensils_option':
-            tagsToUpdate = ustensilTags;
-            filterType = 'ustensils';
+            if (!tagsToUpdate.ustensils.includes(selectValue)) {
+                tagsToUpdate.ustensils.push(selectValue); 
+                filterType = 'ustensils';
+            }
             break;
         default:
             break;
     }
 
-    console.log(tagsToUpdate, selectValue)
-    // Vérifier si la valeur sélectionnée est déjà présente dans les tags
-    if (!tagsToUpdate.includes(selectValue)) {
-        // Si la valeur n'est pas présente, l'ajouter
-        tagsToUpdate.push(selectValue);
-        focusConstruct(tagsToUpdate, filterType);
-    } else {
-        // Si la valeur est déjà présente, la supprimer
-        deletItem(tagsToUpdate, selectValue, type);
-        focusConstruct(tagsToUpdate, filterType);
-    }
+    focusConstruct(tagsToUpdate, filterType);
     test()
 }
 
+// Met l'affichage à jour en fonction des tags
 function test() {
 
-    console.log("!!!!!!!!!!!!!!!!!!!!")
     // Créer un objet contenant les tags
-    const tags = {
-        ingredients: ingredientTags,
-        ustensils: ustensilTags,
-        appliance: applianceTags
-    };
 
     // Filtrer les recettes en fonction des tags
-    filteredByTag = filterByMulti(allRecipes, tags);
-    console.log("?????????????", filteredByTag, tags.ingredients)
+    filteredByTag = filterByMulti(allRecipes, tagsToUpdate);
 
     // Afficher les recettes filtrées
-    displayRecipes(filteredByTag, tags)
+    displayRecipes(filteredByTag, tagsToUpdate)
     // deletItem(tagsToUpdate, p.innerHTML, type);
 }

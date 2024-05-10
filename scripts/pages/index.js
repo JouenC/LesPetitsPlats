@@ -10,7 +10,6 @@ const recipesContainer = document.querySelector(".recipes_cards")
 
 // Count number of recipes
 function recipesCount(numberOfRecipes) {
-    console.log(numberOfRecipes)
     let number = document.querySelector(".recepice_count")
     number.innerHTML = numberOfRecipes + " recettes"
 }
@@ -42,9 +41,8 @@ function recipesCard(recipes, tags) {
             if (tempIngredients.includes(ingredient.toLowerCase())) continue
             tempIngredients.push(ingredient.toLowerCase())
 
-            if(tags) {
-                console.log("?????????", ingredient)
-            }
+            // if(tags) {
+            // }
 
             if(tags && tags.ingredients.includes(ingredient.toLowerCase())) {
                 continue
@@ -144,6 +142,7 @@ const clearRecipes = () => {
     selectUstensils.innerHTML = ``
 }
 
+// Ecoute les options
 function optionListener () {
     const optionIngredient = [...document.querySelectorAll(".dropdown_ingredients_option")]
     const optionAppliance = [...document.querySelectorAll(".dropdown_appliance_option")]
@@ -163,6 +162,7 @@ function optionListener () {
     })
 }
 
+// Ecoute les tags sélectionnés
 function deletListener() {
     // Pour déselectionner un tag
     const deletIngredient = [...document.querySelectorAll(".element_ingredient")]
@@ -172,14 +172,17 @@ function deletListener() {
     deletIngredient.forEach(p => {
         p.addEventListener('click', () =>  {
             deletItem(tagsToUpdate, p.innerHTML, "ingredients");
+            console.log(tagsToUpdate)
+            focusConstruct(tagsToUpdate, "ingredients")
             test()
         } )
     })
     
-
     deletAppliance.forEach(p => {
         p.addEventListener('click', () => {
             deletItem(tagsToUpdate, p.innerHTML, "appliance");
+            console.log(tagsToUpdate)
+            focusConstruct(tagsToUpdate, "appliance")
             test()
         })
     })
@@ -187,6 +190,8 @@ function deletListener() {
     deletUstensils.forEach(p => {
         p.addEventListener('click', () => {
             deletItem(tagsToUpdate, p.innerHTML, "ustensils");
+            console.log(tagsToUpdate)
+            focusConstruct(tagsToUpdate, "ustensils")
             test()
         } )
     })
@@ -197,9 +202,8 @@ function displayRecipes(recipes, tags) {
    
     clearRecipes()
     recipesCount(recipes.length)
-    recipesCard(recipes, tags)  
+    recipesCard(recipes, tags)
     optionListener()
-    // deletListener()
 }
 
 // Call display page
