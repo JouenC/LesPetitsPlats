@@ -97,28 +97,30 @@ function recipesCard(recipes, tags) {
     tempIngredients = []
 
     // Create dropdown option for appliance
-    tempAppliance.forEach((element) => {
+    for (let i = 0; i < tempAppliance.length; i++) {
+        const element = tempAppliance[i];
         if (tags && tags.appliance.includes(element)) {
-            return;
+            continue;
         }
         selectAppliance.innerHTML += `
             <option class="dropdown_select dropdown_appliance_option" value="${element}" aria-label="sorting for ${element}"> ${element} </option>
-        `
-    })
+        `;
+    }
 
     // Stock la liste compléte des appliances
     allAppliances = tempAppliance
     tempAppliance = []
 
     // Create dropdown option for ustensils
-    tempUstensils.forEach((element) => {
+    for (let i = 0; i < tempUstensils.length; i++) {
+        const element = tempUstensils[i];
         if (tags && tags.ustensils.includes(element)) {
-            return;
+            continue;
         }
         selectUstensils.innerHTML += `
             <option class="dropdown_select dropdown_ustensils_option" value="${element}" aria-label="sorting for ${element}"> ${element} </option>
         `;
-    });
+    }
 
     // Stock la liste compléte des ustensils
     allUstensils = tempUstensils
@@ -147,17 +149,15 @@ function optionListener () {
     const optionUstensils = [...document.querySelectorAll(".dropdown_ustensils_option")]
 
     // Appel de la fonction searchDropdown lors d'un clique dans les options
-    optionIngredient.forEach(option => {
-        option.addEventListener('click', searchDropdown)
-    })
+    const optionSets = [optionIngredient, optionAppliance, optionUstensils];
 
-    optionAppliance.forEach(option => {
-        option.addEventListener('click', searchDropdown)
-    })
-
-    optionUstensils.forEach(option => {
-        option.addEventListener('click', searchDropdown)
-    })
+    for (let i = 0; i < optionSets.length; i++) {
+        const optionSet = optionSets[i];
+        for (let j = 0; j < optionSet.length; j++) {
+            const option = optionSet[j];
+            option.addEventListener('click', searchDropdown);
+        }
+    }
 }
 
 // Ecoute les tags sélectionnés
@@ -168,62 +168,59 @@ function deletListener() {
     const deletAppliance = [...document.querySelectorAll(".element_appliance")]
     const deletUstensils = [...document.querySelectorAll(".element_ustensils")]
 
-    deletIngredient.forEach(p => {
+    for (let i = 0; i < deletIngredient.length; i++) {
+        const p = deletIngredient[i];
         p.addEventListener('click', () =>  {
             deletItem(tagsToUpdate, p.textContent, "ingredients");
-            focusConstruct(tagsToUpdate, "ingredients")
-
-            // Si les aucun tags n'est sélectionné, appliquer le résultat de la barre de recherche générale
-            if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.ustensils.length === 0 && tagsToUpdate.ustensils.length === 0) {
-                let generalSearch = document.querySelector("#search").value;
-                searchRecipes(generalSearch);
-                return;
-            } 
-                
-            // Sinon, met à jour l'affichage en tenant compte des tags sélectionnés
-            else {
-                newDisplay()
-            }                
-        } )
-    })
-        
-    deletAppliance.forEach(p => {
-        p.addEventListener('click', () => {
-            deletItem(tagsToUpdate, p.innerHTML, "appliance");
-            focusConstruct(tagsToUpdate, "appliance")
-
-              // Si les aucun tags n'est sélectionné, appliquer le résultat de la barre de recherche générale
-              if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.ustensils.length === 0 && tagsToUpdate.ustensils.length === 0) {
-                let generalSearch = document.querySelector("#search").value;
-                searchRecipes(generalSearch);
-                return;
-            } 
-                
-            // Sinon, met à jour l'affichage en tenant compte des tags sélectionnés
-            else {
-                newDisplay()
-            }    
-        })
-    })
+            focusConstruct(tagsToUpdate, "ingredients");
     
-    deletUstensils.forEach(p => {
-        p.addEventListener('click', () => {
-            deletItem(tagsToUpdate, p.innerHTML, "ustensils");
-            focusConstruct(tagsToUpdate, "ustensils")
-
-              // Si les aucun tags n'est sélectionné, appliquer le résultat de la barre de recherche générale
+            // Si aucun tag n'est sélectionné, appliquer le résultat de la barre de recherche générale
             if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.ustensils.length === 0 && tagsToUpdate.ustensils.length === 0) {
                 let generalSearch = document.querySelector("#search").value;
                 searchRecipes(generalSearch);
                 return;
-            } 
-                
-            // Sinon, met à jour l'affichage en tenant compte des tags sélectionnés
-            else {
-                newDisplay()
-            }    
-        } )
-    })  
+            } else {
+                // Sinon, met à jour l'affichage en tenant compte des tags sélectionnés
+                newDisplay();
+            }
+        });
+    }
+        
+    for (let i = 0; i < deletAppliance.length; i++) {
+        const p = deletAppliance[i];
+        p.addEventListener('click', () => {
+            deletItem(tagsToUpdate, p.textContent, "appliance");
+            focusConstruct(tagsToUpdate, "appliance");
+    
+            // Si aucun tag n'est sélectionné, appliquer le résultat de la barre de recherche générale
+            if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.ustensils.length === 0 && tagsToUpdate.ustensils.length === 0) {
+                let generalSearch = document.querySelector("#search").value;
+                searchRecipes(generalSearch);
+                return;
+            } else {
+                // Sinon, met à jour l'affichage en tenant compte des tags sélectionnés
+                newDisplay();
+            }
+        });
+    }
+    
+    for (let i = 0; i < deletUstensils.length; i++) {
+        const p = deletUstensils[i];
+        p.addEventListener('click', () => {
+            deletItem(tagsToUpdate, p.textContent, "ustensils");
+            focusConstruct(tagsToUpdate, "ustensils");
+    
+            // Si aucun tag n'est sélectionné, appliquer le résultat de la barre de recherche générale
+            if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.ustensils.length === 0 && tagsToUpdate.ustensils.length === 0) {
+                let generalSearch = document.querySelector("#search").value;
+                searchRecipes(generalSearch);
+                return;
+            } else {
+                // Sinon, met à jour l'affichage en tenant compte des tags sélectionnés
+                newDisplay();
+            }
+        });
+    }
 }
 
 // Permet de vider le contenu de la zone de recherche

@@ -63,33 +63,33 @@ function searchRecipesIngredients(search) {
     // Vérifier si tempItem est vide, si c'est le cas, afficher un message d'erreur
     if (tempItem.length === 0) {
         selectIngredient.innerHTML = "";
-        allIngredients.forEach(item => {
-            // Create dropdown option for ingredients
+        for (let i = 0; i < allIngredients.length; i++) {
+            const item = allIngredients[i];
             selectIngredient.innerHTML += `
                 <option class="dropdown_select dropdown_ingredients_option" value="${item}" aria-label="sorting for ${item}"> ${item} </option>
             `;
-        });
+        }
     }
 
     // Vérifier si la saisie est valide (au moins 3 caractères)
     if (search.length < 2) {
         selectIngredient.innerHTML = "";
-        allIngredients.forEach(item => {
-            // Create dropdown option for ingredients
+        for (let i = 0; i < allIngredients.length; i++) {
+            const item = allIngredients[i];
             selectIngredient.innerHTML += `
                 <option class="dropdown_select dropdown_ingredients_option" value="${item}" aria-label="sorting for ${item}"> ${item} </option>
             `;
-        });
+        }
     }
 
     else {
         selectIngredient.innerHTML = "";
-        tempItem.forEach(item => {
-            // Create dropdown option for ingredients
+        for (let i = 0; i < tempItem.length; i++) {
+            const item = tempItem[i];
             selectIngredient.innerHTML += `
                 <option class="dropdown_select dropdown_ingredients_option" value="${item}" aria-label="sorting for ${item}"> ${item} </option>
             `;
-        });
+        }
     }
 }
 
@@ -101,34 +101,33 @@ function searchRecipesAppliances(search) {
 
     // Vérifier si tempItem est vide, si c'est le cas, afficher un message d'erreur
     if (tempItem.length === 0) {
-        selectAppliance.innerHTML = ""
-        allAppliances.forEach(item => {
-            // Create dropdown option for ingredients
+        selectAppliance.innerHTML = "";
+        for (let i = 0; i < allAppliances.length; i++) {
+            const item = allAppliances[i];
             selectAppliance.innerHTML += `
                 <option class="dropdown_select dropdown_appliance_option" value="${item}" aria-label="sorting for ${item}"> ${item} </option>
-            `; 
-        });
+            `;
+        }
     }
 
     // Vérifier si la saisie est valide (au moins 3 caractères)
     if (search.length < 2) {
-        selectAppliance.innerHTML = ""
-        allAppliances.forEach(item => {
-            // Create dropdown option for ingredients
-            selectAppliance.innerHTML += `
-                <option class="dropdown_select dropdown_appliance_option" value="${item}" aria-label="sorting for ${item}"> ${item} </option>
-            `; 
-        });
-    }
-        
-    else {
         selectAppliance.innerHTML = "";
-        tempItem.forEach(item => {
-            // Create dropdown option for ingredients
+        for (let i = 0; i < allAppliances.length; i++) {
+            const item = allAppliances[i];
+            selectAppliance.innerHTML += `
+                <option class="dropdown_select dropdown_appliance_option" value="${item}" aria-label="sorting for ${item}"> ${item} </option>  
+            `;
+        }
+        
+    } else {
+        selectAppliance.innerHTML = "";
+        for (let i = 0; i < tempItem.length; i++) {
+            const item = tempItem[i];
             selectAppliance.innerHTML += `
                 <option class="dropdown_select dropdown_appliance_option" value="${item}" aria-label="sorting for ${item}"> ${item} </option>
-            `; 
-        });
+            `;
+        }
     }
 }
 
@@ -140,35 +139,33 @@ function searchRecipesUstensiles(search) {
 
     // Vérifier si tempItem est vide, si c'est le cas, afficher un message d'erreur
     if (tempItem.length === 0) {
-        selectUstensils.innerHTML = ""
-        allUstensils.forEach(item => {
-            // Create dropdown option for ingredients
+        selectUstensils.innerHTML = "";
+        for (let i = 0; i < allUstensils.length; i++) {
+            const item = allUstensils[i];
             selectUstensils.innerHTML += `
                 <option class="dropdown_select dropdown_ustensils_option" value="${item}" aria-label="sorting for ${item}"> ${item} </option>
             `;
-        });
+        }
     }
 
     // Vérifier si la saisie est valide (au moins 3 caractères)
     if (search.length < 2) {
-        selectUstensils.innerHTML = ""
-        allUstensils.forEach(item => {
-            // Create dropdown option for ingredients
-            selectUstensils.innerHTML += `
-                <option class="dropdown_select dropdown_ustensils_option" value="${item}" aria-label="sorting for ${item}"> ${item} </option>
-            `;
-        });
-    }
-
-    else {
         selectUstensils.innerHTML = "";
-        tempItem.forEach(item => {
-            // Create dropdown option for ingredients
+        for (let i = 0; i < allUstensils.length; i++) {
+            const item = allUstensils[i];
             selectUstensils.innerHTML += `
                 <option class="dropdown_select dropdown_ustensils_option" value="${item}" aria-label="sorting for ${item}"> ${item} </option>
             `;
-        });
-    }      
+        }
+    } else {
+        selectUstensils.innerHTML = "";
+        for (let i = 0; i < tempItem.length; i++) {
+            const item = tempItem[i];
+            selectUstensils.innerHTML += `
+                <option class="dropdown_select dropdown_ustensils_option" value="${item}" aria-label="sorting for ${item}"> ${item} </option>
+            `;
+        }
+    }
 }
 
 // Filtre les entrées dans la barre de recherche
@@ -176,11 +173,12 @@ const searchTag = (searchZone, searchItem) => {
     const tempItem = []
 
     // Récupérez la valeur de chaque élément <option> et ajoutez-la au tableau TempIngredient
-    searchItem.forEach(option => {
+    for (let i = 0; i < searchItem.length; i++) {
+        const option = searchItem[i];
         if (option.includes(searchZone)) {
-           tempItem.push(option); 
-        }   
-    });
+            tempItem.push(option);
+        }
+    }
 
     return tempItem
 }
@@ -189,9 +187,10 @@ const searchTag = (searchZone, searchItem) => {
 const searchElements = document.querySelectorAll('#search, #search_ingredient, #search_appliance, #search_ustensile');
 
 // Ajoutez un écouteur d'événements à chaque élément de recherche
-searchElements.forEach(element => {
+for (let i = 0; i < searchElements.length; i++) {
+    const element = searchElements[i];
     element.addEventListener('keyup', searchBar);
-});
+}
 
 // Delete item from focusRecipes, focusAppliance or focusUstensils
 function deletItem(tags, value, type) {
@@ -210,41 +209,42 @@ divUstensil.className = "focus focus_ustensile"
 function focusConstruct(focus, type) {
 
     let focusElement
-
     switch (type) {
         case 'ingredients':
             focusElement = document.querySelector('.button_dropdown_ingredients')
                 divIngredient.innerHTML = ``
-                focus.ingredients.forEach((element) => 
+                for (let i = 0; i < focus.ingredients.length; i++) {
+                    const element = focus.ingredients[i];
                     divIngredient.innerHTML += `
-                        <p class="element_ingredient">${element}<i class="fa-solid fa-x delet_tag"></i><p>
-                        
-                    `,
-                    divIngredient.style.backgroundColor = 'orange',
-                    focusElement.after(divIngredient)
-                )
+                        <p class="element_ingredient">${element}<i class="fa-solid fa-x delet_tag"></i></p> 
+                    `;
+                    divIngredient.style.backgroundColor = 'orange';
+                    focusElement.after(divIngredient);
+                }
             break;
         case 'appliance':
             focusElement = document.querySelector('.button_dropdown_appliance')
                 divAppliance.innerHTML = ``
-                focus.appliance.forEach((element) => 
+                for (let i = 0; i < focus.appliance.length; i++) {
+                    const element = focus.appliance[i];
                     divAppliance.innerHTML += `
-                        <p class="element_appliance">${element}<i class="fa-solid fa-x delet_tag"><p>
-                    `,
-                    divAppliance.style.backgroundColor = 'orange',
-                    focusElement.after(divAppliance)
-                )
+                        <p class="element_appliance">${element}<i class="fa-solid fa-x delet_tag"></i></p>
+                    `;
+                }
+                divAppliance.style.backgroundColor = 'orange';
+                focusElement.after(divAppliance);
             break;
         case 'ustensils':
             focusElement = document.querySelector('.button_dropdown_ustensils')
                 divUstensil.innerHTML = ``
-                focus.ustensils.forEach((element) => 
+                for (let i = 0; i < focus.ustensils.length; i++) {
+                    const element = focus.ustensils[i];
                     divUstensil.innerHTML += `
-                        <p class="element_ustensils">${element}<i class="fa-solid fa-x delet_tag"><p>
-                    `,
-                    divUstensil.style.backgroundColor = 'orange',
-                    focusElement.after(divUstensil)
-                )
+                        <p class="element_ustensils">${element}<i class="fa-solid fa-x delet_tag"></i></p>
+                    `;
+                }
+                divUstensil.style.backgroundColor = 'orange';
+                focusElement.after(divUstensil);
             break;
         default:
             console.log('Oups!');
@@ -284,7 +284,6 @@ function searchDropdown() {
         default:
             break;
     }
-
     focusConstruct(tagsToUpdate, filterType);
     newDisplay()
 }

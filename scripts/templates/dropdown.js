@@ -9,17 +9,19 @@ const closeUnusedDropDowns = (usedDropdown = undefined) => {
     const dropdowns = [...document.querySelectorAll(".dropdown_content")];
 
     if (!usedDropdown) {
-        dropdowns.forEach(dropdown => {
+        for (let i = 0; i < dropdowns.length; i++) {
+            const dropdown = dropdowns[i];
             dropdown.classList.remove("show");
-        });
+        }
         return;
     }
-
-    dropdowns.forEach(dropdown => {
+    
+    for (let i = 0; i < dropdowns.length; i++) {
+        const dropdown = dropdowns[i];
         if (dropdown.id !== usedDropdown) {
             dropdown.classList.remove("show");
         }
-    });
+    }
 }
 
 // Ferme les dropdowns et ouvre celui où à lui l'évènement
@@ -29,8 +31,11 @@ const dropdownClickEvent = (dropdown) => {
 }
 
 // Ecouteur sur les boutons des dropdowns
-const dropdownController = (dropdown) => dropdown.addEventListener("click", () => dropdownClickEvent(dropdown));
-[...document.querySelectorAll(".dropbtn")].forEach(dropdownController);
+const dropdowns = document.querySelectorAll(".dropbtn");
+for (let i = 0; i < dropdowns.length; i++) {
+    const dropdown = dropdowns[i];
+    dropdown.addEventListener("click", () => dropdownClickEvent(dropdown));
+}
 
 const overlay = document.querySelector(".overlay")
 
@@ -43,6 +48,8 @@ overlay.addEventListener("click", function() {
 });
 
 // Ecouteur sur les titres des dropdowns
-[...document.querySelectorAll(".dropdown_title")].forEach(dropdown => {
-    dropdown.addEventListener("click", () => dropdownClickEvent(dropdown))
-})
+const dropdownTitles = document.querySelectorAll(".dropdown_title");
+for (let i = 0; i < dropdownTitles.length; i++) {
+    const dropdown = dropdownTitles[i];
+    dropdown.addEventListener("click", () => dropdownClickEvent(dropdown));
+}
