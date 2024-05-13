@@ -41,9 +41,6 @@ function recipesCard(recipes, tags) {
             if (tempIngredients.includes(ingredient.toLowerCase())) continue
             tempIngredients.push(ingredient.toLowerCase())
 
-            // if(tags) {
-            // }
-
             if(tags && tags.ingredients.includes(ingredient.toLowerCase())) {
                 continue
             } else {
@@ -95,10 +92,9 @@ function recipesCard(recipes, tags) {
         recipesContainer.appendChild(article)
     }
     
+    // Stock la liste compléte des ingrédients
     allIngredients = tempIngredients
     tempIngredients = []
-
-    
 
     // Create dropdown option for appliance
     tempAppliance.forEach((element) => {
@@ -110,6 +106,7 @@ function recipesCard(recipes, tags) {
         `
     })
 
+    // Stock la liste compléte des appliances
     allAppliances = tempAppliance
     tempAppliance = []
 
@@ -123,6 +120,7 @@ function recipesCard(recipes, tags) {
         `;
     });
 
+    // Stock la liste compléte des ustensils
     allUstensils = tempUstensils
     tempUstensils = []
 
@@ -172,44 +170,37 @@ function deletListener() {
     // Si les aucun tags n'est sélectionné, appliquer le résultat de la barre de recherche générale
     if (deletIngredient.length === 0 && deletAppliance.length === 0 && deletUstensils.length === 0) {
         let generalSearch = document.querySelector("#search").value
-        console.log(generalSearch)
         searchRecipes(generalSearch)
     } 
     
-    else 
-    {
+    else {
         deletIngredient.forEach(p => {
             p.addEventListener('click', () =>  {
-                console.log(tagsToUpdate, p.textContent)
                 deletItem(tagsToUpdate, p.textContent, "ingredients");
-                console.log(tagsToUpdate)
                 focusConstruct(tagsToUpdate, "ingredients")
-                // test()
-                
-                
+                newDisplay()
             } )
         })
         
         deletAppliance.forEach(p => {
             p.addEventListener('click', () => {
                 deletItem(tagsToUpdate, p.innerHTML, "appliance");
-                console.log(tagsToUpdate)
                 focusConstruct(tagsToUpdate, "appliance")
-                // test()
+                newDisplay()
             })
         })
     
         deletUstensils.forEach(p => {
             p.addEventListener('click', () => {
                 deletItem(tagsToUpdate, p.innerHTML, "ustensils");
-                console.log(tagsToUpdate)
                 focusConstruct(tagsToUpdate, "ustensils")
-                // test()
+                newDisplay()
             } )
         })
     }  
 }
 
+// Permet de vider le contenu de la zone de recherche
 document.querySelector(".fa-x_search").addEventListener('click', () => {
     document.querySelector("#search").value = "";
     displayRecipes(recipes)

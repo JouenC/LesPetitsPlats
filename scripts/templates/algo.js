@@ -286,18 +286,15 @@ function searchDropdown() {
     }
 
     focusConstruct(tagsToUpdate, filterType);
-    test()
+    newDisplay()
 }
 
 // Met l'affichage à jour en fonction des tags
-function test() {
-
-    // Créer un objet contenant les tags
+function newDisplay() {
 
     // Filtrer les recettes en fonction des tags
     filteredByTag = filterByMulti(allRecipes, tagsToUpdate);
 
     // Afficher les recettes filtrées
-    displayRecipes(filteredByTag, tagsToUpdate)
-    // deletItem(tagsToUpdate, p.innerHTML, type);
+    displayRecipes(filteredByTag, tagsToUpdate) 
 }
