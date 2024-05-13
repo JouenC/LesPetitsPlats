@@ -169,33 +169,52 @@ function deletListener() {
     const deletAppliance = [...document.querySelectorAll(".element_appliance")]
     const deletUstensils = [...document.querySelectorAll(".element_ustensils")]
 
-    deletIngredient.forEach(p => {
-        p.addEventListener('click', () =>  {
-            deletItem(tagsToUpdate, p.innerHTML, "ingredients");
-            console.log(tagsToUpdate)
-            focusConstruct(tagsToUpdate, "ingredients")
-            test()
-        } )
-    })
+    // Si les aucun tags n'est sélectionné, appliquer le résultat de la barre de recherche générale
+    if (deletIngredient.length === 0 && deletAppliance.length === 0 && deletUstensils.length === 0) {
+        let generalSearch = document.querySelector("#search").value
+        console.log(generalSearch)
+        searchRecipes(generalSearch)
+    } 
     
-    deletAppliance.forEach(p => {
-        p.addEventListener('click', () => {
-            deletItem(tagsToUpdate, p.innerHTML, "appliance");
-            console.log(tagsToUpdate)
-            focusConstruct(tagsToUpdate, "appliance")
-            test()
+    else 
+    {
+        deletIngredient.forEach(p => {
+            p.addEventListener('click', () =>  {
+                console.log(tagsToUpdate, p.textContent)
+                deletItem(tagsToUpdate, p.textContent, "ingredients");
+                console.log(tagsToUpdate)
+                focusConstruct(tagsToUpdate, "ingredients")
+                // test()
+                
+                
+            } )
         })
-    })
-
-    deletUstensils.forEach(p => {
-        p.addEventListener('click', () => {
-            deletItem(tagsToUpdate, p.innerHTML, "ustensils");
-            console.log(tagsToUpdate)
-            focusConstruct(tagsToUpdate, "ustensils")
-            test()
-        } )
-    })
+        
+        deletAppliance.forEach(p => {
+            p.addEventListener('click', () => {
+                deletItem(tagsToUpdate, p.innerHTML, "appliance");
+                console.log(tagsToUpdate)
+                focusConstruct(tagsToUpdate, "appliance")
+                // test()
+            })
+        })
+    
+        deletUstensils.forEach(p => {
+            p.addEventListener('click', () => {
+                deletItem(tagsToUpdate, p.innerHTML, "ustensils");
+                console.log(tagsToUpdate)
+                focusConstruct(tagsToUpdate, "ustensils")
+                // test()
+            } )
+        })
+    }  
 }
+
+document.querySelector(".fa-x_search").addEventListener('click', () => {
+    document.querySelector("#search").value = "";
+    displayRecipes(recipes)
+})
+
 
 // Display page
 function displayRecipes(recipes, tags) {

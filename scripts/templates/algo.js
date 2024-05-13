@@ -217,7 +217,8 @@ function focusConstruct(focus, type) {
                 divIngredient.innerHTML = ``
                 focus.ingredients.forEach((element) => 
                     divIngredient.innerHTML += `
-                        <p class="element_ingredient">${element}<p>
+                        <p class="element_ingredient">${element}<i class="fa-solid fa-x delet_tag"></i><p>
+                        
                     `,
                     divIngredient.style.backgroundColor = 'orange',
                     focusElement.after(divIngredient)
@@ -256,7 +257,7 @@ function focusConstruct(focus, type) {
 let tagsToUpdate = {ingredients: [], appliance: [], ustensils: [], }; // Tableau pour stocker les tags à mettre à jour
 
 // Construit la liste des tags selectionnés
-function searchDropdown(type) {
+function searchDropdown() {
     const selectValue = this.value.trim().toLowerCase(); // Valeur sélectionnée dans le dropdown
     
     let filterType = ''; // Type de filtre à mettre à jour

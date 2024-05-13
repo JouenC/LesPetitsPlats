@@ -48,6 +48,12 @@ nav {
   cursor: pointer;
 }
 
+.fa-x_search {
+  position: relative;
+  right: 160px;
+  cursor: pointer;
+}
+
 .recipes {
   margin: 50px 100px;
   display: flex;
@@ -131,12 +137,14 @@ nav {
   border-radius: 11px;
   border: none;
   font-family: "Manerope", Arial, Helvetica, sans-serif;
-  padding: 10px 10PX 5PX 15px;
   font-size: 16px;
   overflow-x: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .show {
@@ -168,11 +176,14 @@ nav {
 .element_appliance,
 .element_ustensils {
   font-family: "Manerope", Arial, Helvetica, sans-serif;
-  padding: 10px 10PX 5PX 15px;
+  padding: 10px 10PX 10PX 15px;
   overflow-x: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .recipes_cards {
