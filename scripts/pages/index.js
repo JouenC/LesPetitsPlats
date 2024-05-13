@@ -32,26 +32,21 @@ function recipesCard(recipes, tags) {
 
         // Create ingredient ant unit for each recipes
         let ingredients = ""  
-        for(let j = 0; j < currentRecipe.ingredients.length; j++) {
-            let {ingredient, unit = "", quantity = ""} = currentRecipe.ingredients[j]
-
+        currentRecipe.ingredients.forEach(({ingredient, unit = "", quantity = ""}) => {
             // Create a part for cards
-            ingredients+= `<li class="card_ingredients"> ${ingredient} <div class="card_quantity">${quantity} ${unit}</div></li>`
-
-            if (tempIngredients.includes(ingredient.toLowerCase())) continue
-            tempIngredients.push(ingredient.toLowerCase())
-
-            if(tags && tags.ingredients.includes(ingredient.toLowerCase())) {
-                continue
-            } else {
-                // Create dropdown option for ingredients
-            selectIngredient.innerHTML += `
-                <option class="dropdown_select dropdown_ingredients_option" value="${ingredient}" aria-label="sorting for ${ingredient}"> ${ingredient} </option>
-            `
+            ingredients += `<li class="card_ingredients">${ingredient} <div class="card_quantity">${quantity} ${unit}</div></li>`;
+        
+            if (!tempIngredients.includes(ingredient.toLowerCase())) {
+                tempIngredients.push(ingredient.toLowerCase());
             }
-            
-            
-        }
+        
+            if (!tags || !tags.ingredients.includes(ingredient.toLowerCase())) {
+                // Create dropdown option for ingredients
+                selectIngredient.innerHTML += `
+                    <option class="dropdown_select dropdown_ingredients_option" value="${ingredient}" aria-label="sorting for ${ingredient}"> ${ingredient} </option>
+                `;
+            }
+        });
         
         // Creation d'un tableau contenant les appliances
         if (!tempAppliance.includes(recipes[i].appliance.toLowerCase())) {
@@ -59,10 +54,12 @@ function recipesCard(recipes, tags) {
         }
         
         // Création d'un tableau contenant les ustensils
-        for(let j = 0; j < recipes[i].ustensils.length; j++) {
-            if (tempUstensils.includes(recipes[i].ustensils[j].toLowerCase())) continue
-            tempUstensils.push(recipes[i].ustensils[j].toLowerCase())
-        }
+        recipes[i].ustensils.forEach(ustensil => {
+            const lowerCaseUstensil = ustensil.toLowerCase();
+            if (!tempUstensils.includes(lowerCaseUstensil)) {
+                tempUstensils.push(lowerCaseUstensil);
+            }
+        });
 
         // Cards HTML
         article.innerHTML = `
@@ -189,7 +186,7 @@ function deletListener() {
         
     deletAppliance.forEach(p => {
         p.addEventListener('click', () => {
-            deletItem(tagsToUpdate, p.innerHTML, "appliance");
+            deletItem(tagsToUpdate, p.textContent, "appliance");
             focusConstruct(tagsToUpdate, "appliance")
 
               // Si les aucun tags n'est sélectionné, appliquer le résultat de la barre de recherche générale
@@ -208,7 +205,7 @@ function deletListener() {
     
     deletUstensils.forEach(p => {
         p.addEventListener('click', () => {
-            deletItem(tagsToUpdate, p.innerHTML, "ustensils");
+            deletItem(tagsToUpdate, p.textContent, "ustensils");
             focusConstruct(tagsToUpdate, "ustensils")
 
               // Si les aucun tags n'est sélectionné, appliquer le résultat de la barre de recherche générale

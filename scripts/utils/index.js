@@ -1,20 +1,20 @@
 // Met en place la liste des ingrédients en minuscule
 const getRecipeIngredientsArray = (resource) => {
   let ingredients = [];
-  for (let el of resource.ingredients) {
-    ingredients.push(el.ingredient.toLowerCase())
-  }
-  return ingredients
-}
+  resource.ingredients.forEach((el) => {
+    ingredients.push(el.ingredient.toLowerCase());
+  });
+  return ingredients;
+};
 
 // Transforme en minuscule
 const listElementToLowerCase = (list) => {
   let res = [];
-  for (const el of list) {
+  list.forEach((el) => {
     res.push(el.toLowerCase());
-  }
+  });
   return res;
-}
+};
 
 // Filtre les ingrédients et élimine les doublons
 const filterResourceByIngredients = (el, filter) => {
@@ -75,24 +75,24 @@ const filterBy = (resources, filter, types) => {
 const filterByMulti = (resources, filters) => {
   const resourceSubset = [];
 
-  for (const el of resources) {
+  resources.forEach((el) => {
     let isSubset = true; // Pour vérifier si l'élément satisfait tous les filtres
 
-    for (let [tagFamily, tags] of Object.entries(filters)) {
-      if (!tags.length) continue;
+    Object.entries(filters).forEach(([tagFamily, tags]) => {
+        if (!tags.length) return;
 
-      const formattedTags = tags.map(tag => tag.toLowerCase());
-      if (!filterFunction[tagFamily](el, formattedTags)) {
-        isSubset = false;
-        break;
-      }
-    }
-  
+        const formattedTags = tags.map(tag => tag.toLowerCase());
+        if (!filterFunction[tagFamily](el, formattedTags)) {
+            isSubset = false;
+            return;
+        }
+    });
+
     // Si l'élément satisfait tous les filtres, l'ajouter à l'ensemble
     if (isSubset) {
-      resourceSubset.push(el);
+        resourceSubset.push(el);
     }
-  }
+});
   return resourceSubset;
 }
 
