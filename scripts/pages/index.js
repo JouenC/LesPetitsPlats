@@ -189,7 +189,7 @@ function deletListener() {
         
     deletAppliance.forEach(p => {
         p.addEventListener('click', () => {
-            deletItem(tagsToUpdate, p.innerHTML, "appliance");
+            deletItem(tagsToUpdate, p.textContent, "appliance");
             focusConstruct(tagsToUpdate, "appliance")
 
               // Si les aucun tags n'est sélectionné, appliquer le résultat de la barre de recherche générale
@@ -208,7 +208,7 @@ function deletListener() {
     
     deletUstensils.forEach(p => {
         p.addEventListener('click', () => {
-            deletItem(tagsToUpdate, p.innerHTML, "ustensils");
+            deletItem(tagsToUpdate, p.textContent, "ustensils");
             focusConstruct(tagsToUpdate, "ustensils")
 
               // Si les aucun tags n'est sélectionné, appliquer le résultat de la barre de recherche générale

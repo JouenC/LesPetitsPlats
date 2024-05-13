@@ -229,7 +229,7 @@ function focusConstruct(focus, type) {
                 divAppliance.innerHTML = ``
                 focus.appliance.forEach((element) => 
                     divAppliance.innerHTML += `
-                        <p class="element_appliance">${element}<i class="fa-solid fa-x delet_tag"><p>
+                        <p class="element_appliance">${element}<i class="fa-solid fa-x delet_tag"></i><p>
                     `,
                     divAppliance.style.backgroundColor = 'orange',
                     focusElement.after(divAppliance)
@@ -240,7 +240,7 @@ function focusConstruct(focus, type) {
                 divUstensil.innerHTML = ``
                 focus.ustensils.forEach((element) => 
                     divUstensil.innerHTML += `
-                        <p class="element_ustensils">${element}<i class="fa-solid fa-x delet_tag"><p>
+                        <p class="element_ustensils">${element}<i class="fa-solid fa-x delet_tag"></i><p>
                     `,
                     divUstensil.style.backgroundColor = 'orange',
                     focusElement.after(divUstensil)
