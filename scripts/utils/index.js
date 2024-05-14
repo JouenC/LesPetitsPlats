@@ -18,30 +18,41 @@ const listElementToLowerCase = (list) => {
 
 // Filtre les ingrédients et élimine les doublons
 const filterResourceByIngredients = (el, filter) => {
-    let ingredientsFilter = [filter]; // [[SUcre, caroote]]
-    if (Array.isArray(filter)) {
-      ingredientsFilter = filter
-    }
-    const ingredients = getRecipeIngredientsArray(el);
-      for (ingredientFilter of ingredientsFilter) {
-        if (!ingredients.includes(ingredientFilter)) return false;
+  let ingredientsFilter = [filter]; // [[SUcre, caroote]]
+  if (Array.isArray(filter)) {
+      ingredientsFilter = filter;
+  }
+  const ingredients = getRecipeIngredientsArray(el);
+  
+  let isSubset = true;
+  ingredientsFilter.forEach((ingredientFilter) => {
+      if (!ingredients.includes(ingredientFilter)) {
+          isSubset = false;
+          return;
       }
-
-    return true; 
-}
+  });
+  
+  return isSubset;
+};
 
 // Filtre les ustensils et élimine les doublons
 const filterResourceByUstensils = (el, filter) => {
   let ustensilsFilter = [filter];
   if (Array.isArray(filter)) {
-    ustensilsFilter = filter
+      ustensilsFilter = filter;
   }
-    const formattedList = listElementToLowerCase(el.ustensils);
-    for (ustensilFilter of ustensilsFilter) {
-      if (!formattedList.includes(ustensilFilter)) return false;
-    }
-    return true;
-}
+  const formattedList = listElementToLowerCase(el.ustensils);
+
+  let isSubset = true;
+  ustensilsFilter.forEach((ustensilFilter) => {
+      if (!formattedList.includes(ustensilFilter)) {
+          isSubset = false;
+          return;
+      }
+  });
+
+  return isSubset;
+};
 
 // Filtre les appliances et élimine les doublons
 const filterResourceByAppliance = (el, filter) => {
@@ -60,16 +71,18 @@ const filterResourceByString = (el, filter, researchPool) => el[researchPool].to
 const filterBy = (resources, filter, types) => { 
   let resourceSubset = [];
   const formattedFilter = filter.toLowerCase();
-  for (const el of resources) {
-    for (const t of types) {
-      if (filterFunction[t](el, formattedFilter, t)) {
-        resourceSubset.push(el);
-        break;
-      }
-    }
-  }
+
+  resources.forEach((el) => {
+      types.forEach((t) => {
+          if (filterFunction[t](el, formattedFilter, t)) {
+              resourceSubset.push(el);
+              return;
+          }
+      });
+  });
+
   return resourceSubset;
-}
+};
 
 // Compare plusieurs tableaux pour en repérer les correspondances
 const filterByMulti = (resources, filters) => {
