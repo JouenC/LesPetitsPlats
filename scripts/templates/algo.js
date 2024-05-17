@@ -8,7 +8,7 @@ let filterRecipes = []
 function searchBar() {
     // Récupérer la valeur saisie dans la barre de recherche
     let searchWord = this.value.trim().toLowerCase()
-
+    
     // Supprimer tous les caractères non alphabétiques de la chaîne de recherche
     searchWord = searchWord.replace(/[^a-z]/g, '');
 
@@ -37,15 +37,10 @@ function searchBar() {
 
 function searchRecipes(search) {
     // Display all recipes if search bar is empty
-            if (search.length === 0) {
-                displayRecipes(allRecipes)
-                return
-            }
-
+            
             // Vérifier si la saisie est valide (au moins 3 caractères)
-            if (search.length < 2) {
-                displayRecipes(allRecipes)
-                return
+            if (search.length < 3) {
+                return displayRecipes(allRecipes)
             }
     
             // Filtrer les mots contenant la chaîne de caractère

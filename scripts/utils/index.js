@@ -69,19 +69,19 @@ const filterResourceByString = (el, filter, researchPool) => el[researchPool].to
 
 // Filtre appliquée sur les recettes pour obtenir un tableau de celles correspondantes
 const filterBy = (resources, filter, types) => { 
-  let resourceSubset = [];
+  let resourceSubset = {};
   const formattedFilter = filter.toLowerCase();
 
   resources.forEach((el) => {
       types.forEach((t) => {
           if (filterFunction[t](el, formattedFilter, t)) {
-              resourceSubset.push(el);
-              return;
+              if (el.id in resourceSubset) return; // Pour éviter les doublons (si un élément satisfait plusieurs filtres
+              resourceSubset[el.id] = el;
           }
       });
   });
 
-  return resourceSubset;
+  return Object.values(resourceSubset);
 };
 
 // Compare plusieurs tableaux pour en repérer les correspondances
