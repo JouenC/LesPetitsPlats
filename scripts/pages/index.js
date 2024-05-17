@@ -175,7 +175,7 @@ function deletListener() {
             focusConstruct(tagsToUpdate, "ingredients");
     
             // Si aucun tag n'est sélectionné, appliquer le résultat de la barre de recherche générale
-            if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.ustensils.length === 0 && tagsToUpdate.ustensils.length === 0) {
+            if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.appliance.length === 0 && tagsToUpdate.ustensils.length === 0) {
                 let generalSearch = document.querySelector("#search").value;
                 searchRecipes(generalSearch);
                 return;
@@ -193,7 +193,7 @@ function deletListener() {
             focusConstruct(tagsToUpdate, "appliance");
     
             // Si aucun tag n'est sélectionné, appliquer le résultat de la barre de recherche générale
-            if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.ustensils.length === 0 && tagsToUpdate.ustensils.length === 0) {
+            if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.appliance.length === 0 && tagsToUpdate.ustensils.length === 0) {
                 let generalSearch = document.querySelector("#search").value;
                 searchRecipes(generalSearch);
                 return;
@@ -211,7 +211,7 @@ function deletListener() {
             focusConstruct(tagsToUpdate, "ustensils");
     
             // Si aucun tag n'est sélectionné, appliquer le résultat de la barre de recherche générale
-            if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.ustensils.length === 0 && tagsToUpdate.ustensils.length === 0) {
+            if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.appliance.length === 0 && tagsToUpdate.ustensils.length === 0) {
                 let generalSearch = document.querySelector("#search").value;
                 searchRecipes(generalSearch);
                 return;
