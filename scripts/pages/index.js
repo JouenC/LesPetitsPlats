@@ -160,67 +160,37 @@ function optionListener () {
     }
 }
 
-// Ecoute les tags sélectionnés
+function addDeletListeners(elements, type) {
+    for (let i = 0; i < elements.length; i++) {
+        let p = elements[i];
+        p.addEventListener('click', () => {
+            deletItem(tagsToUpdate, p.textContent, type);
+            focusConstruct(tagsToUpdate, type);
+
+            // Si aucun tag n'est sélectionné, appliquer le résultat de la barre de recherche générale
+            if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.appliance.length === 0 && tagsToUpdate.ustensils.length === 0) {
+                let generalSearch = document.querySelector("#search").value;
+                searchRecipes(generalSearch);
+                return;
+            } 
+            
+            // Sinon, met à jour l'affichage en tenant compte des tags sélectionnés
+            else {
+                newDisplay();
+            }    
+        });
+    }
+}
+
 function deletListener() {
-
     // Pour déselectionner un tag
-    const deletIngredient = [...document.querySelectorAll(".element_ingredient")]
-    const deletAppliance = [...document.querySelectorAll(".element_appliance")]
-    const deletUstensils = [...document.querySelectorAll(".element_ustensils")]
+    const deletIngredient = document.querySelectorAll(".element_ingredient");
+    const deletAppliance = document.querySelectorAll(".element_appliance");
+    const deletUstensils = document.querySelectorAll(".element_ustensils");
 
-    for (let i = 0; i < deletIngredient.length; i++) {
-        const p = deletIngredient[i];
-        p.addEventListener('click', () =>  {
-            deletItem(tagsToUpdate, p.textContent, "ingredients");
-            focusConstruct(tagsToUpdate, "ingredients");
-    
-            // Si aucun tag n'est sélectionné, appliquer le résultat de la barre de recherche générale
-            if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.appliance.length === 0 && tagsToUpdate.ustensils.length === 0) {
-                let generalSearch = document.querySelector("#search").value;
-                searchRecipes(generalSearch);
-                return;
-            } else {
-                // Sinon, met à jour l'affichage en tenant compte des tags sélectionnés
-                newDisplay();
-            }
-        });
-    }
-        
-    for (let i = 0; i < deletAppliance.length; i++) {
-        const p = deletAppliance[i];
-        p.addEventListener('click', () => {
-            deletItem(tagsToUpdate, p.textContent, "appliance");
-            focusConstruct(tagsToUpdate, "appliance");
-    
-            // Si aucun tag n'est sélectionné, appliquer le résultat de la barre de recherche générale
-            if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.appliance.length === 0 && tagsToUpdate.ustensils.length === 0) {
-                let generalSearch = document.querySelector("#search").value;
-                searchRecipes(generalSearch);
-                return;
-            } else {
-                // Sinon, met à jour l'affichage en tenant compte des tags sélectionnés
-                newDisplay();
-            }
-        });
-    }
-    
-    for (let i = 0; i < deletUstensils.length; i++) {
-        const p = deletUstensils[i];
-        p.addEventListener('click', () => {
-            deletItem(tagsToUpdate, p.textContent, "ustensils");
-            focusConstruct(tagsToUpdate, "ustensils");
-    
-            // Si aucun tag n'est sélectionné, appliquer le résultat de la barre de recherche générale
-            if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.appliance.length === 0 && tagsToUpdate.ustensils.length === 0) {
-                let generalSearch = document.querySelector("#search").value;
-                searchRecipes(generalSearch);
-                return;
-            } else {
-                // Sinon, met à jour l'affichage en tenant compte des tags sélectionnés
-                newDisplay();
-            }
-        });
-    }
+    addDeletListeners(deletIngredient, "ingredients");
+    addDeletListeners(deletAppliance, "appliance");
+    addDeletListeners(deletUstensils, "ustensils");
 }
 
 // Permet de vider le contenu de la zone de recherche
