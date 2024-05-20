@@ -140,92 +140,6 @@ const clearRecipes = () => {
     selectUstensils.innerHTML = ``
 }
 
-// Ecoute les options
-function optionListener () {
-    const optionIngredient = [...document.querySelectorAll(".dropdown_ingredients_option")]
-    const optionAppliance = [...document.querySelectorAll(".dropdown_appliance_option")]
-    const optionUstensils = [...document.querySelectorAll(".dropdown_ustensils_option")]
-
-    // Appel de la fonction searchDropdown lors d'un clique dans les options
-    optionIngredient.forEach(option => {
-        option.addEventListener('click', searchDropdown)
-    })
-
-    optionAppliance.forEach(option => {
-        option.addEventListener('click', searchDropdown)
-    })
-
-    optionUstensils.forEach(option => {
-        option.addEventListener('click', searchDropdown)
-    })
-}
-
-// Ecoute les tags sélectionnés
-function deletListener() {
-
-    // Pour déselectionner un tag
-    const deletIngredient = [...document.querySelectorAll(".element_ingredient")]
-    const deletAppliance = [...document.querySelectorAll(".element_appliance")]
-    const deletUstensils = [...document.querySelectorAll(".element_ustensils")]
-
-    deletIngredient.forEach(p => {
-        p.addEventListener('click', () =>  {
-            deletItem(tagsToUpdate, p.textContent, "ingredients");
-            focusConstruct(tagsToUpdate, "ingredients")
-
-            // Si les aucun tags n'est sélectionné, appliquer le résultat de la barre de recherche générale
-            if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.ustensils.length === 0 && tagsToUpdate.ustensils.length === 0) {
-                let generalSearch = document.querySelector("#search").value;
-                searchRecipes(generalSearch);
-                return;
-            } 
-                
-            // Sinon, met à jour l'affichage en tenant compte des tags sélectionnés
-            else {
-                newDisplay()
-            }                
-        } )
-    })
-        
-    deletAppliance.forEach(p => {
-        p.addEventListener('click', () => {
-            deletItem(tagsToUpdate, p.textContent, "appliance");
-            focusConstruct(tagsToUpdate, "appliance")
-
-              // Si les aucun tags n'est sélectionné, appliquer le résultat de la barre de recherche générale
-              if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.ustensils.length === 0 && tagsToUpdate.ustensils.length === 0) {
-                let generalSearch = document.querySelector("#search").value;
-                searchRecipes(generalSearch);
-                return;
-            } 
-                
-            // Sinon, met à jour l'affichage en tenant compte des tags sélectionnés
-            else {
-                newDisplay()
-            }    
-        })
-    })
-    
-    deletUstensils.forEach(p => {
-        p.addEventListener('click', () => {
-            deletItem(tagsToUpdate, p.textContent, "ustensils");
-            focusConstruct(tagsToUpdate, "ustensils")
-
-              // Si les aucun tags n'est sélectionné, appliquer le résultat de la barre de recherche générale
-            if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.ustensils.length === 0 && tagsToUpdate.ustensils.length === 0) {
-                let generalSearch = document.querySelector("#search").value;
-                searchRecipes(generalSearch);
-                return;
-            } 
-                
-            // Sinon, met à jour l'affichage en tenant compte des tags sélectionnés
-            else {
-                newDisplay()
-            }    
-        } )
-    })  
-}
-
 // Permet de vider le contenu de la zone de recherche
 document.querySelector(".fa-x_search").addEventListener('click', () => {
     document.querySelector("#search").value = "";
@@ -239,7 +153,6 @@ function displayRecipes(recipes, tags) {
     clearRecipes()
     recipesCount(recipes.length)
     recipesCard(recipes, tags)
-    optionListener()
 }
 
 // Call display page
