@@ -68,17 +68,18 @@ const filterResourceByAppliance = (el, filter) => {
 const filterResourceByString = (el, filter, researchPool) => el[researchPool].toLowerCase().includes(filter);
 
 // Filtre appliquée sur les recettes pour obtenir un tableau de celles correspondantes
-const filterBy = (resources, filter, types) => { 
-  let resourceSubset = {};
+const filterBy = (resources, filter, types) => {
   const formattedFilter = filter.toLowerCase();
 
-  resources.forEach((el) => {
-      types.forEach((t) => {
-          if (filterFunction[t](el, formattedFilter, t)) {
-              if (el.id in resourceSubset) return; // Pour éviter les doublons (si un élément satisfait plusieurs filtres
-              resourceSubset[el.id] = el;
-          }
-      });
+  // Filtrer les ressources pour chaque type de filtre et combiner les résultats
+  let filteredResources = resources.filter((el) => 
+    types.some((t) => filterFunction[t](el, formattedFilter, t))
+  );
+
+  // Éviter les doublons en utilisant un Set pour stocker les IDs uniques
+  const resourceSubset = {};
+  filteredResources.forEach((el) => {
+    resourceSubset[el.id] = el;
   });
 
   return Object.values(resourceSubset);
