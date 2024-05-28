@@ -163,6 +163,7 @@ function addDeletListeners(elements, type) {
         p.addEventListener('click', () => {
             deletItem(tagsToUpdate, p.textContent, type);
             focusConstruct(tagsToUpdate, type);
+            updateTagsDisplay();
 
             // Si aucun tag n'est sélectionné, appliquer le résultat de la barre de recherche générale
             if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.appliance.length === 0 && tagsToUpdate.ustensils.length === 0) {
@@ -184,10 +185,14 @@ function deletListener() {
     const deletIngredient = [...document.querySelectorAll(".element_ingredient")];
     const deletAppliance = [...document.querySelectorAll(".element_appliance")];
     const deletUstensils = [...document.querySelectorAll(".element_ustensils")];
+    const deletTagsItems = [...document.querySelectorAll(".tag_item")];
 
     addDeletListeners(deletIngredient, "ingredients");
     addDeletListeners(deletAppliance, "appliance");
     addDeletListeners(deletUstensils, "ustensils");
+    addDeletListeners(deletTagsItems, "ingredients")
+    addDeletListeners(deletTagsItems, "appliance")
+    addDeletListeners(deletTagsItems, "ustensils")
 }
 
 // Permet de vider le contenu de la zone de recherche

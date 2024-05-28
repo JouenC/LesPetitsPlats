@@ -279,9 +279,39 @@ function searchDropdown() {
         default:
             break;
     }
-
+    // let tagsList = document.querySelector(".tags_list")
+    // tagsList.innerHTML = tagsToUpdate.ingredients + tagsToUpdate.appliance + tagsToUpdate.ustensils
+    updateTagsDisplay()
     focusConstruct(tagsToUpdate, filterType);
     newDisplay()
+}
+
+let tagsList = document.querySelector(".tags_list");
+
+function updateTagsDisplay() {
+    // Vider la liste des tags avant de la remplir
+    tagsList.innerHTML = "";
+
+    // Parcourir les catégories de tags
+    for (let type in tagsToUpdate) {
+        // Parcourir chaque tag dans la catégorie
+        tagsToUpdate[type].forEach(tag => {
+            // Créer une div pour le tag
+            let tagDiv = document.createElement("div");
+            tagDiv.className = `tag_item tag_${type}`;
+            tagDiv.textContent = tag;
+            console.log(tagDiv)
+
+            // Ajouter un bouton de suppression à chaque tag
+            let deleteButton = document.createElement("i");
+            deleteButton.className = "fa-solid fa-x delet_tag";
+            deleteButton.setAttribute("aria-hidden", "true");
+
+            tagDiv.appendChild(deleteButton);
+            tagsList.appendChild(tagDiv);
+            deletListener()
+        })   
+    }
 }
 
 // Met l'affichage à jour en fonction des tags
