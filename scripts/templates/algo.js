@@ -289,6 +289,8 @@ function searchDropdown() {
     newDisplay()
 }
 
+let tagsList = document.querySelector(".tags_list");
+
 function updateTagsDisplay() {
     // Vider la liste des tags avant de la remplir
     tagsList.innerHTML = "";
