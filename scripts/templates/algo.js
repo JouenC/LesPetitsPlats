@@ -300,7 +300,6 @@ function updateTagsDisplay() {
             let tagDiv = document.createElement("div");
             tagDiv.className = `tag_item tag_${type}`;
             tagDiv.textContent = tag;
-            console.log(tagDiv)
 
             // Ajouter un bouton de suppression à chaque tag
             let deleteButton = document.createElement("i");

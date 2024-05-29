@@ -112,3 +112,25 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.tags_list {
+    display: flex;
+    margin: 0 100px 30px 100px;
+    flex-wrap: wrap;
+}
+
+.tag_item {
+    font-family: "Manerope", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    min-width: 203px;
+    height: 53px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #FFD15B;
+    border-radius: 10px;
+    margin: 0 10px 10px 0;
+    cursor: pointer;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
