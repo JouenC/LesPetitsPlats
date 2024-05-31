@@ -15,7 +15,7 @@ function searchBar() {
     switch (this.id) {
 
         case 'search':
-            searchRecipes(searchWord)  
+            searchController()
             break
 
         case 'search_ingredient':
