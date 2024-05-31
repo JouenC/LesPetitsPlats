@@ -314,6 +314,7 @@ function updateTagsDisplay() {
 
 // Met l'affichage à jour en fonction des tags
 function newDisplay(filtered) {
+    console.log(filtered)
 
     // Filtrer les recettes en fonction des tags
     filteredByTag = filterByMulti(filtered, tagsToUpdate);
@@ -325,7 +326,7 @@ function newDisplay(filtered) {
 const searchController = (event) => {
     const value = document.querySelector('#search').value
     let filtered = allRecipes
-    if (value) {
+    if (value.length > 2) {
         filtered = searchRecipes(value); // Subset de recettes
     }
     const {filteredByTag, tagsToUpdate} = newDisplay(filtered);
