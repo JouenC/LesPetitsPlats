@@ -168,13 +168,13 @@ function addDeletListeners(elements, type) {
             // Si aucun tag n'est sélectionné, appliquer le résultat de la barre de recherche générale
             if (tagsToUpdate.ingredients.length === 0 && tagsToUpdate.appliance.length === 0 && tagsToUpdate.ustensils.length === 0) {
                 let generalSearch = document.querySelector("#search").value;
-                searchRecipes(generalSearch);
+                searchController();
                 return;
             } 
             
             // Sinon, met à jour l'affichage en tenant compte des tags sélectionnés
             else {
-                newDisplay();
+                searchController();
             }    
         });
     });
@@ -198,7 +198,7 @@ function deletListener() {
 // Permet de vider le contenu de la zone de recherche
 document.querySelector(".fa-x_search").addEventListener('click', () => {
     document.querySelector("#search").value = "";
-    displayRecipes(recipes)
+    searchController();
 })
 
 

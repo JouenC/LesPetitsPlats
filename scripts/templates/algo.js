@@ -15,7 +15,7 @@ function searchBar() {
     switch (this.id) {
 
         case 'search':
-            searchRecipes(searchWord)  
+            searchController();
             break
 
         case 'search_ingredient':
@@ -47,7 +47,8 @@ function searchRecipes(search) {
             let fileredRecipesByWord = filterBy(allRecipes, search, ["name", "description", "ingredients", "ustensils", "appliance"]);
             
             // Affiche les nouvelles cards correspondant à la recherche
-            displayRecipes(fileredRecipesByWord)
+            // displayRecipes(fileredRecipesByWord)
+            return fileredRecipesByWord
 }
 
 // Filtre les entrées dans la barre de ingredient
@@ -279,11 +280,9 @@ function searchDropdown() {
         default:
             break;
     }
-    // let tagsList = document.querySelector(".tags_list")
-    // tagsList.innerHTML = tagsToUpdate.ingredients + tagsToUpdate.appliance + tagsToUpdate.ustensils
     updateTagsDisplay()
     focusConstruct(tagsToUpdate, filterType);
-    newDisplay()
+    searchController();
 }
 
 let tagsList = document.querySelector(".tags_list");
@@ -314,11 +313,22 @@ function updateTagsDisplay() {
 }
 
 // Met l'affichage à jour en fonction des tags
-function newDisplay() {
+function newDisplay(filtered) {
 
     // Filtrer les recettes en fonction des tags
-    filteredByTag = filterByMulti(allRecipes, tagsToUpdate);
+    filteredByTag = filterByMulti(filtered, tagsToUpdate);
 
     // Afficher les recettes filtrées
-    displayRecipes(filteredByTag, tagsToUpdate) 
+    return { filteredByTag, tagsToUpdate }
+}
+
+const searchController = (event) => {
+    const value = document.querySelector('#search').value
+    let filtered = allRecipes
+    if (value) {
+        filtered = searchRecipes(value); // Subset de recettes
+    }
+    const {filteredByTag, tagsToUpdate} = newDisplay(filtered);
+
+    return displayRecipes(filteredByTag, tagsToUpdate)
 }
