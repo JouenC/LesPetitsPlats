@@ -43,7 +43,7 @@ function searchRecipes(search) {
             }
 
             // Vérifier si la saisie est valide (au moins 3 caractères)
-            if (search.length < 2) {
+            if (search.length < 3) {
                 displayRecipes(allRecipes)
                 return
             }
