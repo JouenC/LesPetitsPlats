@@ -177,7 +177,7 @@ function addDeletListeners(elements, type) {
             
             // Sinon, met à jour l'affichage en tenant compte des tags sélectionnés
             else {
-                newDisplay();
+                searchController();
             }    
         });
     }
@@ -201,7 +201,7 @@ function deletListener() {
 // Permet de vider le contenu de la zone de recherche
 document.querySelector(".fa-x_search").addEventListener('click', () => {
     document.querySelector("#search").value = "";
-    displayRecipes(recipes)
+    searchController()
 })
 
 

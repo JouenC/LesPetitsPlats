@@ -323,7 +323,7 @@ function newDisplay(filtered) {
     filteredByTag = filterByMulti(filtered, tagsToUpdate);
 
     // Afficher les recettes filtrées
-    displayRecipes(filteredByTag, tagsToUpdate) 
+    return { filteredByTag, tagsToUpdate }
 }
 
 const searchController = (event) => {
