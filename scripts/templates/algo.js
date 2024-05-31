@@ -314,7 +314,6 @@ function updateTagsDisplay() {
 
 // Met l'affichage à jour en fonction des tags
 function newDisplay(filtered) {
-    console.log(filtered)
 
     // Filtrer les recettes en fonction des tags
     filteredByTag = filterByMulti(filtered, tagsToUpdate);
