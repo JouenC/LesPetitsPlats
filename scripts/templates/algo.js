@@ -314,6 +314,7 @@ function updateTagsDisplay() {
             deletListener()
         })   
     }
+    searchController()
 }
 
 // Met l'affichage à jour en fonction des tags
