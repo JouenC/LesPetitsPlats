@@ -64,7 +64,7 @@ nav {
 .flex {
   display: flex;
   justify-content: space-between;
-  width: 680px;
+  width: 750px;
 }
 
 .recepice_count {
@@ -83,7 +83,7 @@ nav {
   border-radius: 11px;
   border: none;
   cursor: pointer;
-  width: 195px;
+  width: 230px;
   height: 56px;
   font-size: 16px;
   font-family: "Manerope", Arial, Helvetica, sans-serif;
@@ -115,9 +115,9 @@ nav {
 .dropdown_content {
   display: none;
   position: absolute;
-  top: 714px;
+  top: 695px;
   background-color: #f1f1f1;
-  width: 195px;
+  width: 230px;
   min-height: 550px;
   z-index: 3;
   border-radius: 11px;
@@ -128,7 +128,7 @@ nav {
   height: 425px;
 }
 .dropdown_tags :hover {
-  background-color: #fc7303;
+  background-color: #FFD15B;
 }
 
 /* Style de l'option du dropdown */
@@ -144,7 +144,8 @@ nav {
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-left: 15px;
 }
 
 .show {
@@ -153,9 +154,9 @@ nav {
 
 .input_dropdown {
   margin-left: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 35px;
   padding: 5px;
-  width: 170px;
+  width: 200px;
 }
 
 .button_dropdown {
@@ -167,7 +168,7 @@ nav {
 .search_logo {
   position: absolute;
   top: 7px;
-  left: 27px;
+  left: 55px;
   background-color: white;
   color: gray;
 }
@@ -184,6 +185,8 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: -7px;
+  background-color: #FFD15B;
 }
 
 .tags_list {

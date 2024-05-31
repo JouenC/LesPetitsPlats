@@ -218,7 +218,6 @@ function focusConstruct(focus, type) {
                     divIngredient.innerHTML += `
                         <p class="element_ingredient">${element}<i class="fa-solid fa-x delet_tag"></i></p> 
                     `;
-                    divIngredient.style.backgroundColor = 'orange';
                     focusElement.after(divIngredient);
                 }
             break;
@@ -231,7 +230,6 @@ function focusConstruct(focus, type) {
                         <p class="element_appliance">${element}<i class="fa-solid fa-x delet_tag"></i></p>
                     `;
                 }
-                divAppliance.style.backgroundColor = 'orange';
                 focusElement.after(divAppliance);
             break;
         case 'ustensils':
@@ -243,7 +241,6 @@ function focusConstruct(focus, type) {
                         <p class="element_ustensils">${element}<i class="fa-solid fa-x delet_tag"></i></p>
                     `;
                 }
-                divUstensil.style.backgroundColor = 'orange';
                 focusElement.after(divUstensil);
             break;
         default:

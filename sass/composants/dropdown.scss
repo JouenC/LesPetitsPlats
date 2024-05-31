@@ -9,7 +9,7 @@
     border-radius: 11px;
     border: none;
     cursor: pointer;
-    width: 195px;
+    width: 230px;
     height: 56px;
     font-size: 16px;
     font-family: 'Manerope', Arial, Helvetica, sans-serif;
@@ -41,9 +41,9 @@
 .dropdown_content {
     display: none;
     position: absolute;
-    top: 714px;
+    top: 695px;
     background-color: #f1f1f1;
-    width: 195px;
+    width: 230px;
     min-height: 550px;
     z-index: 3;
     border-radius: 11px;
@@ -54,7 +54,7 @@
     height: 425px;
 
     & :hover {
-        background-color: #fc7303;
+        background-color: #FFD15B;
     }
 }
 
@@ -71,7 +71,8 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-left: 15px;
 }
 
 .show {
@@ -80,9 +81,9 @@
 
 .input_dropdown {
     margin-left: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 35px;
     padding: 5px;
-    width: 170px;
+    width: 200px;
 }
 
 .button_dropdown {
@@ -94,7 +95,7 @@
 .search_logo {
     position: absolute;
     top: 7px;
-    left: 27px;
+    left: 55px;
     background-color: white;
     color: gray;
 }
@@ -111,6 +112,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: -7px;
+    background-color: #FFD15B;
 }
 
 .tags_list {
