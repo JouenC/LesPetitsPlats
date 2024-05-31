@@ -83,7 +83,7 @@
   margin-left: 15px;
   margin-bottom: 35px;
   padding: 5px;
-  width: 170px;
+  width: 200px;
 }
 
 .button_dropdown {
@@ -95,7 +95,7 @@
 .search_logo {
   position: absolute;
   top: 7px;
-  left: 27px;
+  left: 55px;
   background-color: white;
   color: gray;
 }
